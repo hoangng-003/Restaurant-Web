@@ -9,9 +9,14 @@ if (empty($_SESSION['user_id']))  //if user is not login redirected back to logi
 {
     header('location:login.php');
 }
-else
-{
+else{
+if (isset($_POST['submit'])) {
+    $sql_insert_fb = "INSERT INTO dishes_feedbacks(u_id,d_id,rating_value,feedback)
+            VALUES('" . $_SESSION['user_id'] . "','" . $_POST['d_id'] . "','" . $_POST['rating'] . "','" . $_POST['opinion'] . "')";
+    mysqli_query($db, $sql_insert_fb);
+}
 ?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,8 +33,9 @@ else
     <link href="css/animate.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/feedback-style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style type="text/css" rel="stylesheet">
-
 
         .indent-small {
             margin-left: 5px;
@@ -227,14 +233,13 @@ else
                             <table>
                                 <thead>
                                 <tr>
-
                                     <th>Item</th>
                                     <th>Quantity</th>
                                     <th>price</th>
                                     <th>status</th>
                                     <th>Date</th>
                                     <th>Action</th>
-
+                                    <th>Feedback</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -297,7 +302,19 @@ else
                                                         class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i
                                                             class="fa fa-trash-o" style="font-size:16px"></i></a>
                                             </td>
-
+                                            <td data-column="Feedback"
+                                            ">
+                                            <form action="" method="post">
+                                                <div>
+                                                    <input type="number" name="d_id" hidden>
+                                                    <a class="btn btn-info btn-flat btn-addon btn-xs m-b-10 show-feedback"
+                                                       d_id="<?php echo $row['d_id']; ?>" ;>
+                                                        <i class="fa fa-star-o"
+                                                           style="font-size:16px; color: white;"></i>
+                                                    </a>
+                                                </div>
+                                            </form>
+                                            </td>
                                         </tr>
 
 
@@ -349,8 +366,46 @@ else
 <?php
 include_once("./footer.php");
 ?>
+
 <!-- end:Footer -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <div class="wrapper">
+            <h3>How do you feel?</h3>
+            <form name="feedback-form" action="" method="post" onsubmit="return validateFormFeedBack()">
+                <div class="rating">
+                    <input type="number" name="rating" hidden>
+                    <i class='bx bx-star star' style="--i: 0;"></i>
+                    <i class='bx bx-star star' style="--i: 1;"></i>
+                    <i class='bx bx-star star' style="--i: 2;"></i>
+                    <i class='bx bx-star star' style="--i: 3;"></i>
+                    <i class='bx bx-star star' style="--i: 4;"></i>
+                </div>
+                <div class="d_id">
+                    <input type="number" name="d_id" hidden>
+                </div>
+                <textarea name="opinion" cols="30" rows="5" placeholder="Your opinion..."></textarea>
+                <div class="btn-group">
+                    <button type="submit" name="submit" class="btn submit">Submit</button>
+                    <button type="button" class="btn cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+</div>
+
+<script>
+    function validateFormFeedBack() {
+        let opinion = document.forms["feedback-form"]["opinion"].value;
+        let rating = document.forms["feedback-form"]["rating"].value;
+        if (opinion == "" && rating == "") {
+            alert("Data should not be empty!");
+            return false;
+        }
+    }
+</script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -363,6 +418,7 @@ include_once("./footer.php");
 <script src="js/headroom.js"></script>
 <script src="js/foodpicky.min.js"></script>
 <script src="js/widget_body.js"></script>
+<script src="js/feedback.js"></script>
 </body>
 
 </html>

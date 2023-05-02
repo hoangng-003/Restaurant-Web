@@ -18,8 +18,8 @@ foreach ($_SESSION["cart_item"] as $item) {
 
     if ($_POST['submit']) {
 
-        $SQL = "insert into users_orders(u_id,title,quantity,price) 
-                values('" . $_SESSION["user_id"] . "','" . $item["title"] . "','" . $item["quantity"] . "','" . $item["price"] . "')";
+        $SQL = "insert into users_orders(u_id, d_id, title, quantity, price) 
+                values('" . $_SESSION["user_id"] . "','" . $item["d_id"] . "','".$item["title"] . "','" . $item["quantity"] . "','" . $item["price"] . "')";
         mysqli_query($db, $SQL);
         $success = "Thank you! Your Order Placed successfully!";
     }

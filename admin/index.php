@@ -5,16 +5,17 @@ include("../connection/connect.php");
 error_reporting(0);
 session_start();
 if (!empty($_SESSION["adm_id"])) {
-    header("Location: ./dashboard.php");
+//    header("Location: ./dashboard.php");
+    header("refresh:0;url=dashboard.php");
 }
 
 if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
+    $username = htmlspecialchars($_POST['username']);
     $password = $_POST['password'];
 
     if (!empty($_POST["submit"])) {
-        $loginquery = "SELECT * FROM admin WHERE username='$username' && password='" . md5($password) . "'";
-        $result = mysqli_query($db, $loginquery);
+        $login_query = "SELECT * FROM admin WHERE username='$username' && password='" . md5($password) . "'";
+        $result = mysqli_query($db, $login_query);
         $row = mysqli_fetch_array($result);
 
         if (is_array($row)) {

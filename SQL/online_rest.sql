@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2023 at 05:19 PM
+-- Generation Time: May 03, 2023 at 01:11 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `online_rest`
 --
+
+DELIMITER $$
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `getFeedbackRating` (`d_id_` INT) RETURNS DOUBLE  begin
+	DECLARE result double DEFAULT 0;
+    DECLARE result_ceiling double DEFAULT 0;
+    DECLARE result_offset double DEFAULT 0;
+    
+    SELECT ROUND(SUM(rating_value)/SUM(if(rating_value = 0, 0, 1)), 2) into result
+    FROM `dishes_feedbacks`
+    WHERE d_id = d_id_;
+    set result_ceiling = ceiling(result);
+    set result_offset = result_ceiling - result;
+    set result = CASE
+    	when result_offset <= 0.25 then result_ceiling
+        when result_offset <= 0.75 then result_ceiling - 0.5
+        else result_ceiling-1
+    end;
+    return result;
+end$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -90,6 +114,46 @@ INSERT INTO `dishes` (`d_id`, `rs_id`, `title`, `slogan`, `price`, `img`) VALUES
 (18, 55, 'Com tam', 'ngon vcl', '100.00', '644c0fefd1ab1.png'),
 (19, 55, 'Com rang dua bo', 'ngon', '20.00', '644cdabf56c54.jpg'),
 (21, 56, 'Pizza', 'pazzi', '95.00', '644d2cdab3a5a.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dishes_feedbacks`
+--
+
+CREATE TABLE `dishes_feedbacks` (
+  `df_id` int(222) NOT NULL,
+  `u_id` int(222) NOT NULL,
+  `d_id` int(222) NOT NULL,
+  `rating_value` int(222) DEFAULT NULL,
+  `feedback` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `dishes_feedbacks`
+--
+
+INSERT INTO `dishes_feedbacks` (`df_id`, `u_id`, `d_id`, `rating_value`, `feedback`) VALUES
+(4, 35, 18, 2, 'tạm được'),
+(10, 33, 18, 3, ''),
+(11, 33, 18, 4, ''),
+(12, 33, 18, 2, ''),
+(13, 33, 18, 5, ''),
+(14, 33, 21, 3, ''),
+(15, 33, 21, 5, ''),
+(16, 33, 21, 2, ''),
+(17, 33, 21, 0, 'ngon'),
+(18, 33, 18, 0, 'được'),
+(19, 33, 18, 5, ''),
+(20, 33, 18, 5, ''),
+(21, 33, 21, 1, ''),
+(22, 33, 18, 5, ''),
+(23, 33, 21, 3, ''),
+(24, 33, 21, 4, ''),
+(25, 33, 21, 2, ''),
+(26, 33, 21, 2, ''),
+(27, 33, 21, 2, ''),
+(28, 33, 19, 4, '');
 
 -- --------------------------------------------------------
 
@@ -185,12 +249,12 @@ INSERT INTO `res_category` (`c_id`, `c_name`, `date`) VALUES
 CREATE TABLE `users` (
   `u_id` int(222) NOT NULL,
   `username` varchar(222) NOT NULL,
-  `f_name` varchar(222) NOT NULL,
-  `l_name` varchar(222) NOT NULL,
+  `f_name` varchar(222) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `l_name` varchar(222) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(222) NOT NULL,
   `phone` varchar(222) NOT NULL,
   `password` varchar(222) NOT NULL,
-  `address` text NOT NULL,
+  `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `status` int(222) NOT NULL DEFAULT 1,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -200,7 +264,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`u_id`, `username`, `f_name`, `l_name`, `email`, `phone`, `password`, `address`, `status`, `date`) VALUES
-(33, 'duykhanhxx03', 'Khanh', 'Tran Duy', 'duykhanhxx03@gmail.com', '0914508451', 'c87f31787f1020520ef13a45f6640c5e', 'KTX Ngo?i ng?', 1, '2023-03-14 09:04:33');
+(33, 'duykhanhxx03', 'Khanh', 'Tran Duy', 'duykhanhxx03@gmail.com', '0914508451', 'c87f31787f1020520ef13a45f6640c5e', 'KTX Ngoại ngữ', 1, '2023-05-01 03:01:36'),
+(35, 'tunoxy', 'Duy Khánh', 'Trần Duy', 'duykhanhtest1@gmail.com', '0999999999', 'c87f31787f1020520ef13a45f6640c5e', 'Thái Nguyên', 1, '2023-05-01 03:01:19');
 
 -- --------------------------------------------------------
 
@@ -211,6 +276,7 @@ INSERT INTO `users` (`u_id`, `username`, `f_name`, `l_name`, `email`, `phone`, `
 CREATE TABLE `users_orders` (
   `o_id` int(222) NOT NULL,
   `u_id` int(222) NOT NULL,
+  `d_id` int(222) NOT NULL,
   `title` varchar(222) NOT NULL,
   `quantity` int(222) NOT NULL,
   `price` decimal(10,2) NOT NULL,
@@ -222,11 +288,11 @@ CREATE TABLE `users_orders` (
 -- Dumping data for table `users_orders`
 --
 
-INSERT INTO `users_orders` (`o_id`, `u_id`, `title`, `quantity`, `price`, `status`, `date`) VALUES
-(45, 33, 'Com tam', 2, '100.00', 'closed', '2023-04-29 08:51:05'),
-(46, 33, 'Com tam', 3, '100.00', NULL, '2023-04-29 08:53:27'),
-(48, 33, 'Mi tom', 1, '5.00', NULL, '2023-04-29 08:53:27'),
-(54, 33, 'Mi tom', 1, '5.00', NULL, '2023-04-29 09:56:59');
+INSERT INTO `users_orders` (`o_id`, `u_id`, `d_id`, `title`, `quantity`, `price`, `status`, `date`) VALUES
+(65, 33, 18, 'Com tam', 1, '100.00', NULL, '2023-05-01 06:30:54'),
+(66, 33, 21, 'Pizza', 2, '95.00', NULL, '2023-05-01 06:45:32'),
+(67, 35, 18, 'Com tam', 1, '100.00', NULL, '2023-05-01 20:20:37'),
+(68, 33, 19, 'Com rang dua bo', 1, '20.00', NULL, '2023-05-02 04:27:34');
 
 --
 -- Indexes for dumped tables
@@ -249,6 +315,12 @@ ALTER TABLE `admin_codes`
 --
 ALTER TABLE `dishes`
   ADD PRIMARY KEY (`d_id`);
+
+--
+-- Indexes for table `dishes_feedbacks`
+--
+ALTER TABLE `dishes_feedbacks`
+  ADD PRIMARY KEY (`df_id`);
 
 --
 -- Indexes for table `remark`
@@ -303,6 +375,12 @@ ALTER TABLE `dishes`
   MODIFY `d_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
+-- AUTO_INCREMENT for table `dishes_feedbacks`
+--
+ALTER TABLE `dishes_feedbacks`
+  MODIFY `df_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
 -- AUTO_INCREMENT for table `remark`
 --
 ALTER TABLE `remark`
@@ -324,13 +402,13 @@ ALTER TABLE `res_category`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `u_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `u_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `users_orders`
 --
 ALTER TABLE `users_orders`
-  MODIFY `o_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `o_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -29,7 +29,7 @@ error_reporting(0); // hide undefined index errors
 session_start(); // temp sessions
 if (isset($_POST['submit']))   // if button is submit
 {
-    $username = $_POST['username'];  //fetch records from login form
+    $username = htmlspecialchars($_POST['username']);  //fetch records from login form
     $password = $_POST['password'];
 
     if (!empty($_POST["submit"]))   // if records were not empty
@@ -40,8 +40,8 @@ if (isset($_POST['submit']))   // if button is submit
         if (is_array($row))  // if matching records in the array & if everything is right
         {
             $_SESSION["user_id"] = $row['u_id']; // put user id into temp session
-//            header("refresh:1;url=index.php"); // redirect to index.php page
-            header("Location: ./index.php"); // redirect to index.php page but fix
+            header("refresh:0;url=index.php"); // redirect to index.php page
+//            header("Location: ./index.php"); // redirect to index.php page but fix
         } else {
             $message = "Invalid Username or Password!"; // throw error
         }

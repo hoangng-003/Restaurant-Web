@@ -27,7 +27,7 @@ session_start(); //start temp session until logout/browser closed
 <body class="home">
 
 <!--header starts-->
-<?php include_once ("./header.php")?>
+<?php include_once("./header.php") ?>
 <!-- banner part starts -->
 <section class="hero bg-image" data-image-src="images/img/main.jpeg">
     <div class="hero-inner">
@@ -38,14 +38,14 @@ session_start(); //start temp session until logout/browser closed
                 <form class="form-inline" action="./food_searching.php" method="get">
                     <div class="form-group">
                         <label class="sr-only" for="exampleInputAmount">I would like to eat....</label>
-                        <div class="form-group">
-                            <input name="name"type="text" class="form-control form-control-lg" id="exampleInputAmount"
-                                   placeholder="I would like to eat...." style="width: 50vw;"></div>
+
+                        <input name="name" type="text" class="form-control form-control-lg" id="exampleInputAmount"
+                               placeholder="I would like to eat....">
                     </div>
                     <!--                    <button onclick="location.href='restaurants.php'" type="button" class="btn theme-btn btn-lg">Search-->
                     <!--                        food-->
                     <!--                    </button>-->
-                    <button  type="submit" class="btn theme-btn btn-lg">Search
+                    <button type="submit" class="btn theme-btn btn-lg">Search
                     </button>
                 </form>
             </div>
@@ -95,16 +95,33 @@ session_start(); //start temp session until logout/browser closed
 
             <?php
             // fetch records from database to display popular first 3 dishes from table
-            $query_res = mysqli_query($db, "select r.rs_id as rs_id, d.title as title, d.slogan as slogan,
+            $query_res = mysqli_query($db, "select getFeedBackRating(d_id) as rating, r.rs_id as rs_id, d.title as title, d.slogan as slogan,
             d.price as price, d.img as img, r.latitude as latitude, r.longitude as longitude from dishes d join restaurant r on r.rs_id = d.rs_id limit 3;");
             while ($r = mysqli_fetch_array($query_res)) {
+                $rating_star = '';
+                $count = 0;
+                for ($i = 0; $i < floor($r['rating']); $i++) {
+                    $rating_star=$rating_star.'<i class="fa fa-star"></i>';
+                    $count++;
+                }
+                if ($r['rating']-floor($r['rating']) == 0.5){
+                    $rating_star = $rating_star.'<i class="fa fa-star-half-o"></i>';
+                    $count++;
+                }
+                if ($count<5){
+                    for ($i = 0; $i < 5-$count; $i++) {
+                        $rating_star=$rating_star.'<i class="fa fa-star-o"></i>';
+                    }
+                }
                 echo '  <div class="col-xs-12 col-sm-6 col-md-4 food-item">
                             <div class="food-item-wrap">
                                 <div class="figure-wrap bg-image" data-image-src="admin/res_img/dishes/' . $r['img'] . '">
-                                    <div class="distance" latitude = '.$r['latitude'].' longitude = '.$r['longitude'].'>
+                                    <div class="distance" latitude = ' . $r['latitude'] . ' longitude = ' . $r['longitude'] . '>
                                         <i class="fa fa-pin"></i>
                                     </div>
-                                    <div class="rating pull-left"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
+                                    <div class="rating pull-left ' . $r['rating'] . '">
+                                       '.$rating_star.'
+                                     </div>
                                     <div class="review pull-right"><a href="#">198 reviews</a> </div>
                                 </div>
                                 <div class="content">
