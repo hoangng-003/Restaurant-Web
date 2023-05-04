@@ -56,8 +56,8 @@ session_start();
     <!-- //results show -->
     <section class="restaurants-page">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-3">
+            <div class="row rest__container">
+<!--                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-3">-->
                     <div class="widget clearfix">
                         <!-- /widget heading -->
                         <div class="widget-heading">
@@ -90,8 +90,8 @@ session_start();
                         </div>
                     </div>
                     <!-- end:Widget -->
-                </div>
-                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-9">
+<!--                </div>-->
+<!--                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-9">-->
                     <div class="bg-gray restaurant-entry">
                         <div class="row">
                             <?php $ress = mysqli_query($db, "select * from restaurant");
@@ -128,10 +128,7 @@ session_start();
                         <!--end:row -->
                     </div>
 
-
-                </div>
-
-
+<!--                </div>-->
             </div>
         </div>
 </div>

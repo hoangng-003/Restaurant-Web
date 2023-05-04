@@ -22,6 +22,7 @@ include_once 'product-action.php'; //including controller
     <link href="css/animate.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/review-style.css">
 </head>
 
 <body class="home">
@@ -132,9 +133,27 @@ include_once 'product-action.php'; //including controller
                             $products = $query_food->get_result();
 
                         }
+
+                        $review_list = '';
                         if (!empty($products)) {
                             foreach ($products as $product) {
-
+                                $query_reviews = mysqli_query($db, "select df.*, concat_ws(' ',u.f_name,u.l_name) as u_name from dishes_feedbacks df join users u on df.u_id=u.u_id where d_id='$product[d_id]'");
+                                $review_list = $review_list . "<div class='product-rating'  d_id = '$product[d_id]' style='display: none'>";
+                                while ($r_d = mysqli_fetch_array($query_reviews)) {
+                                    $review_list = $review_list .
+                                        "<div class='product-rating__wrap'>" .
+                                        '<div class="product-rating__avatar">
+                            <svg class="avatar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c39.77 0 72 32.24 72 72S295.8 272 256 272c-39.76 0-72-32.24-72-72S216.2 128 256 128zM256 448c-52.93 0-100.9-21.53-135.7-56.29C136.5 349.9 176.5 320 224 320h64c47.54 0 87.54 29.88 103.7 71.71C356.9 426.5 308.9 448 256 448z"/></svg>
+                         </div>' .
+                                        "<div class='product-rating__main'>
+                                <div class='product-rating__author-name'>" . $r_d['u_name'] . "</div>
+                                <div class='product-rating__rating_star'>" . rating_star($r_d['rating_value']) . "</div>
+                                <div class='product-rating__feedback'>" . $r_d['feedback'] . "</div>
+                            </div>" .
+                                        "</div>"
+                                    ;
+                                }
+                                $review_list = $review_list . "</div>";
                                 ?>
                                 <div class="food-item">
                                     <div class="row">
@@ -149,6 +168,7 @@ include_once 'product-action.php'; //including controller
                                                 <div class="rest-descr">
                                                     <h6><a href="#"><?php echo $product['title']; ?></a></h6>
                                                     <p> <?php echo $product['slogan']; ?></p>
+                                                    <button type="button" class="openModal" d_id='<?php echo $product['d_id']; ?>'>Reviews</button>
                                                 </div>
                                                 <!-- end:Description -->
                                         </div>
@@ -169,7 +189,16 @@ include_once 'product-action.php'; //including controller
                                 <?php
                             }
                         }
-
+                        echo
+                            '<div class="modal" id="modal">
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <div class="wrapper">
+                                        <h3>Review</h3>
+                                        <div>' . $review_list . '</div>
+                                    </div>
+                                </div>
+                            </div>';
                         ?>
 
 
@@ -286,6 +315,7 @@ include_once("./footer.php");
 <script src="js/jquery.isotope.min.js"></script>
 <script src="js/headroom.js"></script>
 <script src="js/foodpicky.min.js"></script>
+<script src="js/review.js"></script>
 <script src="js/widget_body.js"></script>
 </body>
 

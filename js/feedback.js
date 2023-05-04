@@ -10,7 +10,6 @@ $(document).ready(function () {
     $('.show-feedback').click(function () {
         let d_id = this.attributes['d_id'].nodeValue;
         d_idElement.value = d_id;
-        console.log(d_idElement.value);
     });
 
     allStar.forEach((item, idx) => {
@@ -59,4 +58,13 @@ $(document).ready(function () {
     };
 
 });
+
+function validateFormFeedBack() {
+    let opinion = document.forms["feedback-form"]["opinion"].value;
+    let rating = document.forms["feedback-form"]["rating"].value;
+    if (opinion == "" && rating == "") {
+        alert("Data should not be empty!");
+        return false;
+    }
+}
 

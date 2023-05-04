@@ -2,6 +2,7 @@
 <html lang="en">
 <?php
 include("connection/connect.php");  //include connection file
+include_once 'product-action.php'; //including controller
 error_reporting(0);  // using to hide undefined index errors
 session_start(); //start temp session until logout/browser closed
 
@@ -20,6 +21,7 @@ session_start(); //start temp session until logout/browser closed
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animsition.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/review-style.css">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -91,28 +93,32 @@ session_start(); //start temp session until logout/browser closed
             <p class="lead">The easiest way to your favourite food</p>
         </div>
         <div class="row">
-
-
             <?php
             // fetch records from database to display popular first 3 dishes from table
-            $query_res = mysqli_query($db, "select getFeedBackRating(d_id) as rating, r.rs_id as rs_id, d.title as title, d.slogan as slogan,
-            d.price as price, d.img as img, r.latitude as latitude, r.longitude as longitude from dishes d join restaurant r on r.rs_id = d.rs_id limit 3;");
+            $query_res = mysqli_query($db, "select getFeedBackRating(d_id) as rating, getReviewCount(d_id) as rvcount, r.rs_id, d.title, d.d_id, d.slogan,
+            d.price, d.img, r.latitude, r.longitude from dishes d join restaurant r on r.rs_id = d.rs_id limit 3;");
+
+            $review_list = '';
             while ($r = mysqli_fetch_array($query_res)) {
-                $rating_star = '';
-                $count = 0;
-                for ($i = 0; $i < floor($r['rating']); $i++) {
-                    $rating_star=$rating_star.'<i class="fa fa-star"></i>';
-                    $count++;
+                $query_reviews = mysqli_query($db, "select df.*, concat_ws(' ',u.f_name,u.l_name) as u_name from dishes_feedbacks df join users u on df.u_id=u.u_id where d_id='$r[d_id]'");
+
+                $review_list = $review_list . "<div class='product-rating'  d_id = '$r[d_id]' style='display: none'>";
+                while ($r_d = mysqli_fetch_array($query_reviews)) {
+                    $review_list = $review_list .
+                        "<div class='product-rating__wrap'>" .
+                        '<div class="product-rating__avatar">
+                            <svg class="avatar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c39.77 0 72 32.24 72 72S295.8 272 256 272c-39.76 0-72-32.24-72-72S216.2 128 256 128zM256 448c-52.93 0-100.9-21.53-135.7-56.29C136.5 349.9 176.5 320 224 320h64c47.54 0 87.54 29.88 103.7 71.71C356.9 426.5 308.9 448 256 448z"/></svg>
+                         </div>' .
+                        "<div class='product-rating__main'>
+                                <div class='product-rating__author-name'>" . $r_d['u_name'] . "</div>
+                                <div class='product-rating__rating_star'>" . rating_star($r_d['rating_value']) . "</div>
+                                <div class='product-rating__feedback'>" . $r_d['feedback'] . "</div>
+                            </div>" .
+                        "</div>"
+                    ;
                 }
-                if ($r['rating']-floor($r['rating']) == 0.5){
-                    $rating_star = $rating_star.'<i class="fa fa-star-half-o"></i>';
-                    $count++;
-                }
-                if ($count<5){
-                    for ($i = 0; $i < 5-$count; $i++) {
-                        $rating_star=$rating_star.'<i class="fa fa-star-o"></i>';
-                    }
-                }
+                $review_list = $review_list . "</div>";
+
                 echo '  <div class="col-xs-12 col-sm-6 col-md-4 food-item">
                             <div class="food-item-wrap">
                                 <div class="figure-wrap bg-image" data-image-src="admin/res_img/dishes/' . $r['img'] . '">
@@ -120,9 +126,9 @@ session_start(); //start temp session until logout/browser closed
                                         <i class="fa fa-pin"></i>
                                     </div>
                                     <div class="rating pull-left ' . $r['rating'] . '">
-                                       '.$rating_star.'
+                                       ' . rating_star($r['rating']). '
                                      </div>
-                                    <div class="review pull-right"><a href="#">198 reviews</a> </div>
+                                    <div class="review pull-right"><button class="openModal" d_id=' . $r['d_id'] . '>' . $r['rvcount'] . ' reviews</button> </div>
                                 </div>
                                 <div class="content">
                                     <h5><a href="dishes.php?res_id=' . $r['rs_id'] . '">' . $r['title'] . '</a></h5>
@@ -132,6 +138,16 @@ session_start(); //start temp session until logout/browser closed
                             </div>
                     </div>';
             }
+            echo
+                '<div class="modal" id="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <div class="wrapper">
+                                <h3>Review</h3>
+                                <div>' . $review_list . '</div>
+                            </div>
+                        </div>
+                </div>';
             ?>
 
         </div>
@@ -304,97 +320,10 @@ session_start(); //start temp session until logout/browser closed
         </div>
     </div>
 </section>
-<!-- start: FOOTER -->
-<footer class="footer">
-    <div class="container">
-        <!-- top footer statrs -->
-        <div class="row top-footer">
-            <div class="col-xs-12 col-sm-3 footer-logo-block color-gray">
-                <a href="#"> <img src="images/food-picky-logo.png" alt="Footer logo"> </a> <span>Order Delivery &amp; Take-Out </span>
-            </div>
-            <div class="col-xs-12 col-sm-2 about color-gray">
-                <h5>About Us</h5>
-                <ul>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">History</a></li>
-                    <li><a href="#">Our Team</a></li>
-                    <li><a href="#">We are hiring</a></li>
-                </ul>
-            </div>
-            <div class="col-xs-12 col-sm-2 how-it-works-links color-gray">
-                <h5>How it Works</h5>
-                <ul>
-                    <li><a href="#">Enter your location</a></li>
-                    <li><a href="#">Choose restaurant</a></li>
-                    <li><a href="#">Choose meal</a></li>
-                    <li><a href="#">Pay via credit card</a></li>
-                    <li><a href="#">Wait for delivery</a></li>
-                </ul>
-            </div>
-            <div class="col-xs-12 col-sm-2 pages color-gray">
-                <h5>Pages</h5>
-                <ul>
-                    <li><a href="#">Search results page</a></li>
-                    <li><a href="#">User Sing Up Page</a></li>
-                    <li><a href="#">Pricing page</a></li>
-                    <li><a href="#">Make order</a></li>
-                    <li><a href="#">Add to cart</a></li>
-                </ul>
-            </div>
-            <div class="col-xs-12 col-sm-3 popular-locations color-gray">
-                <h5>Popular locations</h5>
-                <ul>
-                    <li><a href="#">Sarajevo</a></li>
-                    <li><a href="#">Split</a></li>
-                    <li><a href="#">Tuzla</a></li>
-                    <li><a href="#">Sibenik</a></li>
-                    <li><a href="#">Zagreb</a></li>
-                    <li><a href="#">Brcko</a></li>
-                    <li><a href="#">Beograd</a></li>
-                    <li><a href="#">New York</a></li>
-                    <li><a href="#">Gradacac</a></li>
-                    <li><a href="#">Los Angeles</a></li>
-                </ul>
-            </div>
-        </div>
-        <!-- top footer ends -->
-        <!-- bottom footer statrs -->
-        <div class="bottom-footer">
-            <div class="row">
-                <div class="col-xs-12 col-sm-3 payment-options color-gray">
-                    <h5>Payment Options</h5>
-                    <ul>
-                        <li>
-                            <a href="#"> <img src="images/paypal.png" alt="Paypal"> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <img src="images/mastercard.png" alt="Mastercard"> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <img src="images/maestro.png" alt="Maestro"> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <img src="images/stripe.png" alt="Stripe"> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <img src="images/bitcoin.png" alt="Bitcoin"> </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-4 address color-gray">
-                    <h5>Address</h5>
-                    <p>Concept design of oline food order and deliveye,planned as restaurant directory</p>
-                    <h5>Phone: <a href="tel:+080000012222">080 000012 222</a></h5></div>
-                <div class="col-xs-12 col-sm-5 additional-info color-gray">
-                    <h5>Addition informations</h5>
-                    <p>Join the thousands of other restaurants who benefit from having their menus on TakeOff</p>
-                </div>
-            </div>
-        </div>
-        <!-- bottom footer ends -->
-    </div>
-</footer>
-<!-- end:Footer -->
+
+<?php include_once("footer.php") ?>
+
+
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -406,6 +335,7 @@ session_start(); //start temp session until logout/browser closed
 <script src="js/jquery.isotope.min.js"></script>
 <script src="js/headroom.js"></script>
 <script src="js/get_distance.js"></script>
+<script src="js/review.js"></script>
 <script src="js/foodpicky.min.js"></script>
 </body>
 

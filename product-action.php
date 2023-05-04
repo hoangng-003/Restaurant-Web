@@ -49,3 +49,21 @@ if (!empty($_GET["action"])) {
             break;
     }
 }
+function rating_star($rating_value){
+    $rating_star_element = '';
+    $count_star = 0;
+    for ($i = 0; $i < floor($rating_value); $i++) {
+        $rating_star_element = $rating_star_element . '<i class="fa fa-star"></i>';
+        $count_star++;
+    }
+    if ($rating_value - floor($rating_value) == 0.5) {
+        $rating_star_element = $rating_star_element . '<i class="fa fa-star-half-o"></i>';
+        $count_star++;
+    }
+    if ($count_star < 5) {
+        for ($i = 0; $i < 5 - $count_star; $i++) {
+            $rating_star_element = $rating_star_element . '<i class="fa fa-star-o"></i>';
+        }
+    }
+    return $rating_star_element;
+}

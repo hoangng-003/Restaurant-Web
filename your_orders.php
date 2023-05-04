@@ -189,10 +189,8 @@ if (isset($_POST['submit'])) {
     <!-- //results show -->
     <section class="restaurants-page">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-3">
-
-
+            <div class="row order__container">
+                <div class="order-widget col-xs-12 col-sm-3 col-md-3 col-lg-3">
                     <div class="widget clearfix">
                         <!-- /widget heading -->
                         <div class="widget-heading">
@@ -226,10 +224,9 @@ if (isset($_POST['submit'])) {
                     </div>
                     <!-- end:Widget -->
                 </div>
-                <div class="col-xs-12 col-sm-7 col-md-7 ">
-                    <div class="bg-gray restaurant-entry">
-                        <div class="row">
-
+                <div class="order-table col-xs-12 col-sm-7 col-md-7 ">
+                    <div class="bg-gray">
+                        <div class="row" >
                             <table>
                                 <thead>
                                 <tr>
@@ -307,7 +304,7 @@ if (isset($_POST['submit'])) {
                                             <form action="" method="post">
                                                 <div>
                                                     <input type="number" name="d_id" hidden>
-                                                    <a class="btn btn-info btn-flat btn-addon btn-xs m-b-10 show-feedback"
+                                                    <a class="btn btn-info btn-flat btn-addon btn-xs m-b-10 <?php if($status != "closed") echo "forbidden-feedback"; else echo "show-feedback"; ?>"
                                                        d_id="<?php echo $row['d_id']; ?>" ;>
                                                         <i class="fa fa-star-o"
                                                            style="font-size:16px; color: white;"></i>
@@ -395,17 +392,6 @@ include_once("./footer.php");
 </div>
 
 </div>
-
-<script>
-    function validateFormFeedBack() {
-        let opinion = document.forms["feedback-form"]["opinion"].value;
-        let rating = document.forms["feedback-form"]["rating"].value;
-        if (opinion == "" && rating == "") {
-            alert("Data should not be empty!");
-            return false;
-        }
-    }
-</script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

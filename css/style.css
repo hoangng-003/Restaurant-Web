@@ -250,7 +250,7 @@ hr {
 }
 
 .space-sm {
-    padding-bottom: 30;
+    padding-bottom: 30px;
     padding-top: 30px
 }
 
@@ -871,7 +871,7 @@ hr {
 }
 
 @media (max-width: 543px) {
-    ...
+
 }
 
 @media (min-width: 544px) and (max-width: 767px) {
@@ -1765,11 +1765,28 @@ footer li a {
     border-right: 0;
 }
 
+.container .rest__container.row{
+    display: flex;
+}
+.container .rest__container.row .widget{
+    width: 20%;
+}
+
+@media (max-width: 62em) {
+    .container .order__container.row .order-widget{
+        display: none;
+    }
+    .container .order__container.row .order-table{
+        width: 100%;
+    }
+}
+
 .widget {
     border: 1px solid #eaebeb;
     background: #fafaf8;
     border-radius: 3px;
     margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
 .widget-heading {
