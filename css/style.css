@@ -25,6 +25,16 @@ Contact: info@codenpixel.com
 
 
 */
+* {
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*box-sizing: border-box;*/
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    --primary-color: #60ba62;
+}
 
 body {
     background: rgba(252, 251, 249, 0.68);
@@ -56,7 +66,7 @@ h6 {
 }
 
 a {
-    color: #f30;
+    color: var(--primary-color);
 }
 
 a:hover {
@@ -128,7 +138,7 @@ hr {
 
 .custom-control-input:checked~.custom-control-indicator {
     color: #fff;
-    background-color: #f30;
+    background-color: var(--primary-color);
     margin-top: 0;
     padding: 10px;
     border-radius: 100%;
@@ -146,8 +156,8 @@ hr {
 }
 
 .custom-control-input:focus~.custom-control-indicator {
-    -webkit-box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem #f30;
-    box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem #f30;
+    -webkit-box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem var(--primary-color);
+    box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem var(--primary-color);
 }
 
 .custom-radio .custom-control-input:checked~.custom-control-indicator {
@@ -156,7 +166,7 @@ hr {
 
 .custom-control-input:active~.custom-control-indicator {
     color: #fff;
-    background-color: #f30
+    background-color: var(--primary-color)
 }
 
 .custom-control-input:disabled~.custom-control-indicator {
@@ -206,28 +216,31 @@ hr {
 }
 
 .theme-btn {
-    background-color: #f30;
-    border-color: #f30;
-    color: #fff
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+    border-radius: 10px;
 }
 
 .theme-btn-dash {
-    border: 2px dashed #f30;
+    border: 2px dashed var(--primary-color);
     background-color: transparent;
-    color: #f30
+    color: var(--primary-color);
+
+    border-radius: 10px;
 }
 
 .theme-btn-dash:hover,
 .theme-btn,
 .theme-btn.btn-lg:hover,
 .btn-secondary:hover {
-    background-color: #f30;
+    background-color: var(--primary-color);
     color: #fff;
-    border: 1px solid #f30
+    border: 1px solid var(--primary-color)
 }
 
 .theme-btn-dash:hover {
-    border: 2px solid #f30;
+    border: 2px solid var(--primary-color);
     color: #fff
 }
 
@@ -236,7 +249,7 @@ hr {
 }
 
 .primary-color {
-    color: #f30
+    color: var(--primary-color)
 }
 
 
@@ -349,8 +362,8 @@ hr {
 .page-item.active .page-link,
 .page-item.active .page-link:focus,
 .page-item.active .page-link:hover {
-    background-color: #f30;
-    border-color: #f30;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 
@@ -363,6 +376,8 @@ hr {
     width: 100%;
     border: 0;
     z-index: 99;
+    backdrop-filter: blur(2em) !important;
+    -webkit-backdrop-filter: blur(2em) !important;
 }
 
 .nav-fixed {
@@ -371,11 +386,21 @@ hr {
     z-index: 10;
 }
 
+div#mainNavbarCollapse {
+    background: rgba(0,0,0,0.1);
+    padding-right: 10px;
+    border-radius: 10px;
+    border: 2px white solid;
+    max-width: 50%;
+}
+
 .navbar {
-    background-image: url("../images/menu-bg.jpg");
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    /*box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);*/
     padding: .95rem 1rem;
     border-radius: 0;
 }
+
 
 .navbar-nav .nav-item {
     padding-left: 10px;
@@ -432,7 +457,7 @@ hr {
     line-height: 1;
     background: 0 0;
     border: 1px solid transparent;
-    color: #f30;
+    color: var(--primary-color);
     border-radius: 2px;
 }
 
@@ -454,7 +479,7 @@ hr {
 }
 
 .link-item.active span {
-    background-color: #f30;
+    background-color: var(--primary-color);
     color: #fff
 }
 
@@ -553,6 +578,14 @@ hr {
 }
 .form-inline .form-group #exampleInputAmount{
     width: 100%;
+    box-sizing: border-box;
+    border: 3px darkgray solid;
+    transition: 0.4s;
+    border-radius: 10px;
+}
+.form-inline .form-group #exampleInputAmount:focus {
+    border-color: var(--primary-color);
+    /* border-bottom-width: 5px; */
 }
 
 
@@ -594,7 +627,7 @@ hr {
 }
 
 .step-item h4 span {
-    color: #f30;
+    color: var(--primary-color);
 }
 
 .step1:after,
@@ -647,7 +680,7 @@ hr {
 }
 
 .location-match a {
-    color: #f30;
+    color: var(--primary-color);
 }
 
 .location-match a:hover {
@@ -670,6 +703,8 @@ hr {
     overflow: hidden;
     margin-bottom: 30px;
     background: #fafaf8;
+
+    border-radius: 10px;
 }
 
 .food-item-wrap h5 a {
@@ -799,7 +834,7 @@ hr {
 
 .food-item-wrap:hover h5>a,
 .food-item-wrap:hover .right-text>a {
-    color: #f30;
+    color: var(--primary-color);
 }
 
 .food-item-wrap .figure-text {
@@ -824,7 +859,7 @@ hr {
 }
 
 .food-item-wrap .distance {
-    background: #f30;
+    background: var(--primary-color);
     border-radius: 3px;
     color: #fff;
     font-size: 12px;
@@ -990,7 +1025,7 @@ button.close {
     right: -15px;
     position: absolute;
     top: -15px;
-    background-color: #f30;
+    background-color: var(--primary-color);
     opacity: 1;
     width: 30px;
     height: 30px;
@@ -1090,7 +1125,7 @@ Steps
     width: 32px;
     height: 32px;
     line-height: 38px;
-    background-color: #f30;
+    background-color: var(--primary-color);
     border-radius: 50%;
     font-size: 1.5em;
     font-family: "Give You Glory", cursive;
@@ -1258,7 +1293,7 @@ Steps
 }
 
 .featured-restaurants .ratings span i {
-    color: #f30;
+    color: var(--primary-color);
 }
 
 .featured-restaurants .ratings .fa-star-o {}
@@ -1310,7 +1345,7 @@ Steps
 
 .add-restaurants p strong {
     font-weight: 600;
-    color: #f30;
+    color: var(--primary-color);
 }
 
 @media (min-width: 320px) and (max-width: 543px) {
@@ -1350,7 +1385,7 @@ App section
 .app-section:after {
     content: "";
     background: url(../images/city-2.png) center bottom;
-    background-color: #f30;
+    background-color: var(--primary-color);
     display: block;
     position: absolute;
     top: 100px;
@@ -1498,7 +1533,7 @@ footer span {
 }
 
 .address h5 a {
-    color: #f30;
+    color: var(--primary-color);
     font-size: 26px;
     font-family: "Give You Glory", cursive;
     margin-left: 20px;
@@ -1532,7 +1567,7 @@ footer ul li a {
 }
 
 footer ul li a:hover {
-    color: #f30;
+    color: var(--primary-color);
 }
 
 footer li a {
@@ -1831,7 +1866,7 @@ footer li a {
 
 .sidebar-title {
     padding: 15px 15px 15px;
-    background: #f30;
+    background: var(--primary-color);
     float: left;
     width: 100%;
 }
@@ -1879,7 +1914,7 @@ footer li a {
 }
 
 .main-block ul li:hover a {
-    color: #f30
+    color: var(--primary-color)
 }
 
 .main-block ul:hover li:last-child {
@@ -1921,6 +1956,10 @@ a.more-link {
     background: #fafaf8;
     border-radius: 2px;
     position: relative;
+
+    /*new*/
+    border-radius: 10px;
+    border: 3px #eaebeb solid;
 }
 
 .widget-body {
@@ -2021,7 +2060,9 @@ a.more-link {
 }
 
 .menu-widget .food-item .item-cart-info {
-    padding-top: 20px
+    padding-top: 0px;
+    display: flex;
+    flex-direction: column;
 }
 
 .menu-widget .food-item .price {
@@ -2029,6 +2070,7 @@ a.more-link {
     color: #000;
     position: relative;
     margin-top: 6px;
+    text-align: center;
 }
 
 .order-row .form-control {
@@ -2098,7 +2140,11 @@ a[aria-expanded=false] .fa-angle-down {
     border: 1px solid #eaebeb;
     border-radius: 2px;
     margin-bottom: 20px;
+
+    border-radius: 10px;
+    border: 3px #eee solid;
 }
+
 
 .restaurant-entry .entry-logo {
     float: left;
@@ -2145,7 +2191,7 @@ a[aria-expanded=false] .fa-angle-down {
 }
 
 .restaurant-entry .right-review .rating-block {
-    color: #f30;
+    color: var(--primary-color);
     background: transparent;
     border: none;
     padding: 5px 15px 5px;
@@ -2222,8 +2268,8 @@ a[aria-expanded=false] .fa-angle-down {
 
 .tag:hover {
     color: #fff;
-    border-color: #f30;
-    background-color: #f30
+    border-color: var(--primary-color);
+    background-color: var(--primary-color)
 }
 
 
@@ -2374,7 +2420,7 @@ a[aria-expanded=false] .fa-angle-down {
     display: block;
     width: 20px;
     height: 20px;
-    background-color: #f30;
+    background-color: var(--primary-color);
     color: #fff;
     line-height: 20px;
     text-align: center;
@@ -2407,7 +2453,7 @@ a[aria-expanded=false] .fa-angle-down {
     left: 10px;
     top: 10px;
     z-index: 9999;
-    background: #f30;
+    background: var(--primary-color);
     display: inline-block;
     padding: 0px 10px;
     margin-top: 5px;
@@ -2439,7 +2485,7 @@ a[aria-expanded=false] .fa-angle-down {
 }
 
 .wwone__map-infobox__inner__heading {
-    color: #f30;
+    color: var(--primary-color);
     display: block;
     width: 100%;
     font-size: 16px;
@@ -2459,7 +2505,7 @@ a[aria-expanded=false] .fa-angle-down {
 }
 
 .wwone__map-infobox__inner__btn {
-    background-color: #f30;
+    background-color: var(--primary-color);
     padding: 6px 15px;
     border-radius: 3px;
     display: inline-block;
@@ -2678,7 +2724,7 @@ a[aria-expanded=false] .fa-angle-down {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     border-radius: 4px;
-    background-color: #f30;
+    background-color: var(--primary-color);
 }
 
 .slider-selection.tick-slider-selection {
@@ -2780,5 +2826,47 @@ a[aria-expanded=false] .fa-angle-down {
     font-weight: 600;
     padding: 0 5px;
     color: #3a3e47;
+}
+
+.counter {
+    width: 150px;
+    margin: 1em auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;;
+}
+.counter input {
+    width: 30px;
+    border: 0;
+    padding: 0 !important;
+    line-height: 24px;
+    box-sizing: border-box;
+    font-size: 1em;
+    text-align: center;
+    border: 2px var(--primary-color) solid !important;
+    color: black;
+    /*appearance: none;*/
+    /*outline: 0;*/
+}
+.counter span {
+    box-sizing: border-box;
+    display: block;
+    font-size: 1em;
+    line-height: 24px;
+    padding: 0 5px;
+    cursor: pointer;
+    border: 2px var(--primary-color) solid;
+    color: var(--primary-color);
+    user-select: none;
+}
+.counter span.up{
+    box-sizing: border-box;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.counter span.down{
+    box-sizing: border-box;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 

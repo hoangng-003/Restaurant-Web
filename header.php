@@ -6,7 +6,7 @@
             <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse"
                     data-target="#mainNavbarCollapse">&#9776;
             </button>
-            <a class="navbar-brand" href="./index.php"> <img class="img-rounded" src="images/food-picky-logo.png"
+            <a class="navbar-brand" href="./index.php"> <img class="img-rounded" style="width: auto; height: 35px;" src="images/the-green-logo.png"
                                                              alt="">
             </a>
             <div class="collapse navbar-toggleable-md  float-lg-right" id="mainNavbarCollapse">

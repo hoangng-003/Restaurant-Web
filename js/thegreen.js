@@ -8,32 +8,16 @@
 /* 
 *  Table of content 
 *************************************
-*   Loading animation seetings
+*   Loading animation settings
 *   Adding images via data atr
 *   Range slider.Pricing slider
-*   Headroom (hide - show menu on scrool)
+*   Headroom (hide - show menu on scroll)
 *   Isotope 
 *   
 **/
 
 $(document).ready(function() {
     "use strict";
-    $(".animsition").animsition({
-        inClass: 'fade-in',
-        outClass: 'fade-out',
-        inDuration: 300,
-        outDuration: 300,
-        linkElement: '.animsition-link', // e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
-        loading: true,
-        loadingParentElement: 'body', //animsition wrapper element
-        loadingClass: 'animsition-loading',
-        unSupportCss: ['animation-duration', '-webkit-animation-duration', '-o-animation-duration'], //"unSupportCss" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
-        //The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
-        overlay: false,
-        overlayClass: 'animsition-overlay-slide',
-        overlayParentElement: 'body'
-    });
-   
      $(".bg-image").css("background",function(){var a="url("+$(this).data("image-src")+") no-repeat center center";return a}),$(".bg-image").css("background-size","cover"),
         
     /// Range slider   

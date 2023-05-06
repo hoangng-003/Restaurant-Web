@@ -2,6 +2,7 @@
 <html lang="en">
 <?php
 include("connection/connect.php");
+include_once 'product-action.php'; //including controller
 error_reporting(0);
 session_start();
 ?>
@@ -17,10 +18,10 @@ session_start();
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/animsition.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/review-style.css">
 </head>
 
 <body>
@@ -94,7 +95,7 @@ session_start();
 <!--                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-9">-->
                     <div class="bg-gray restaurant-entry">
                         <div class="row">
-                            <?php $ress = mysqli_query($db, "select * from restaurant");
+                            <?php $ress = mysqli_query($db, "select getRestFeedbackRating(rs.rs_id) as rating, getRestReviewCount(rs.rs_id) as count, getMinDishPrice(rs.rs_id) as min_price, rs.* from restaurant rs");
                             while ($rows = mysqli_fetch_array($ress)) {
                                 echo ' <div class="col-sm-12 col-md-12 col-lg-8 text-xs-center text-sm-left">
 															<div class="entry-logo">
@@ -104,7 +105,7 @@ session_start();
 															<div class="entry-dscr">
 																<h5><a href="dishes.php?res_id=' . $rows['rs_id'] . '" >' . $rows['title'] . '</a></h5> <span>' . $rows['address'] . ' <a href="#">...</a></span>
 																<ul class="list-inline">
-																	<li class="list-inline-item"><i class="fa fa-check"></i> Min $ 10,00</li>
+																	<li class="list-inline-item"><i class="fa fa-check"></i> Min $'.$rows['min_price'].'</li>
 																	<li class="list-inline-item"><i class="fa fa-motorcycle"></i> 30 min</li>
 																</ul>
 															</div>
@@ -114,8 +115,10 @@ session_start();
 														 <div class="col-sm-12 col-md-12 col-lg-4 text-xs-center">
 																<div class="right-content bg-white">
 																	<div class="right-review">
-																		<div class="rating-block"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
-																		<p> 245 Reviews</p> <a href="dishes.php?res_id=' . $rows['rs_id'] . '" class="btn theme-btn-dash">View Menu</a> </div>
+																		<div class="rating-block">
+																		 '.rating_star($rows['rating']).'
+																    </div>
+																		<p> '.$rows['count'].' Reviews</p> <a href="dishes.php?res_id=' . $rows['rs_id'] . '" class="btn theme-btn-dash">View Menu</a> </div>
 																</div>
 																<!-- end:right info -->
 															</div>';
@@ -176,13 +179,11 @@ include_once ("./footer.php");
 <script src="js/jquery.min.js"></script>
 <script src="js/tether.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/animsition.min.js"></script>
 <script src="js/bootstrap-slider.min.js"></script>
 <script src="js/jquery.isotope.min.js"></script>
 <script src="js/headroom.js"></script>
-<script src="js/foodpicky.min.js"></script>
+<script src="js/thegreen.min.js"></script>
 <script src="js/widget_body.js"></script>
-
 </body>
 
 </html>

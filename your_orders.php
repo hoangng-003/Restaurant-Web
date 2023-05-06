@@ -29,7 +29,6 @@ if (isset($_POST['submit'])) {
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/animsition.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
@@ -37,6 +36,9 @@ if (isset($_POST['submit'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style type="text/css" rel="stylesheet">
 
+        :root{
+            --primary-color: #60ba62;
+        }
         .indent-small {
             margin-left: 5px;
         }
@@ -92,7 +94,7 @@ if (isset($_POST['submit'])) {
         }
 
         th {
-            background: #ff3300;
+            background: #60ba62;
             color: white;
             font-weight: bold;
 
@@ -398,11 +400,10 @@ include_once("./footer.php");
 <script src="js/jquery.min.js"></script>
 <script src="js/tether.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/animsition.min.js"></script>
 <script src="js/bootstrap-slider.min.js"></script>
 <script src="js/jquery.isotope.min.js"></script>
 <script src="js/headroom.js"></script>
-<script src="js/foodpicky.min.js"></script>
+<script src="js/thegreen.min.js"></script>
 <script src="js/widget_body.js"></script>
 <script src="js/feedback.js"></script>
 </body>

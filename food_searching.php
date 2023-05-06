@@ -18,7 +18,6 @@ include_once 'product-action.php'; //including controller
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/animsition.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
@@ -175,9 +174,13 @@ include_once 'product-action.php'; //including controller
                                         <!-- end:col -->
                                         <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info">
                                             <span class="price pull-left">$<?php echo $product['price']; ?></span>
-                                            <input class="b-r-0" type="text" name="quantity" style="margin-left:30px;"
-                                                   value="1" size="2"/>
-                                            <input type="submit" class="btn theme-btn" style="margin-left:40px;"
+                                            <div class="counter">
+                                                <span class="down">-</span>
+                                                <input class="b-r-0" type="text" name="quantity"
+                                                       value="1" size="2">
+                                                <span class="up">+</span>
+                                            </div>
+                                            <input type="submit" class="btn theme-btn"
                                                    value="Add to cart"/>
                                         </div>
                                         </form>
@@ -310,11 +313,10 @@ include_once("./footer.php");
 <script src="js/jquery.min.js"></script>
 <script src="js/tether.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/animsition.min.js"></script>
 <script src="js/bootstrap-slider.min.js"></script>
 <script src="js/jquery.isotope.min.js"></script>
 <script src="js/headroom.js"></script>
-<script src="js/foodpicky.min.js"></script>
+<script src="js/thegreen.min.js"></script>
 <script src="js/review.js"></script>
 <script src="js/widget_body.js"></script>
 </body>

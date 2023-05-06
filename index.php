@@ -15,11 +15,10 @@ session_start(); //start temp session until logout/browser closed
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="#">
-    <title>FoodPicky</title>
+    <title>The Green</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/animsition.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link rel="stylesheet" href="css/review-style.css">
     <!-- Custom styles for this template -->
@@ -31,7 +30,7 @@ session_start(); //start temp session until logout/browser closed
 <!--header starts-->
 <?php include_once("./header.php") ?>
 <!-- banner part starts -->
-<section class="hero bg-image" data-image-src="images/img/main.jpeg">
+<section class="hero bg-image" data-image-src="images/img/main.jpg">
     <div class="hero-inner">
         <div class="container text-center hero-text font-white">
             <h1>Order Delivery & Take-Out </h1>
@@ -95,7 +94,7 @@ session_start(); //start temp session until logout/browser closed
         <div class="row">
             <?php
             // fetch records from database to display popular first 3 dishes from table
-            $query_res = mysqli_query($db, "select getFeedBackRating(d_id) as rating, getReviewCount(d_id) as rvcount, r.rs_id, d.title, d.d_id, d.slogan,
+            $query_res = mysqli_query($db, "select getDishFeedbackRating(d_id) as rating, getDishReviewCount(d_id) as rvcount, r.rs_id, d.title, d.d_id, d.slogan,
             d.price, d.img, r.latitude, r.longitude from dishes d join restaurant r on r.rs_id = d.rs_id limit 3;");
 
             $review_list = '';
@@ -248,7 +247,7 @@ session_start(); //start temp session until logout/browser closed
 
 
                 <?php //fetching records from table and filter using html data-filter tag
-                $ress = mysqli_query($db, "select * from restaurant");
+                $ress = mysqli_query($db, "select getRestFeedbackRating(rs.rs_id) as rating, getRestReviewCount(rs.rs_id) as count, getMinDishPrice(rs.rs_id) as min_price, rs.* from restaurant rs");
                 while ($rows = mysqli_fetch_array($ress)) {
                     // fetch records from res_category table according to catgory ID
                     $query = mysqli_query($db, "select * from res_category where c_id='" . $rows['c_id'] . "' ");
@@ -264,15 +263,11 @@ session_start(); //start temp session until logout/browser closed
                                         <div class="col-xs-12 col-sm-9 col-md-12 col-lg-9">
                                             <h5><a href="dishes.php?res_id=' . $rows['rs_id'] . '" >' . $rows['title'] . '</a></h5> <span>' . $rows['address'] . '</span>
                                             <div class="bottom-part">
-                                                <div class="cost"><i class="fa fa-check"></i> Min $ 10,00</div>
+                                                <div class="cost"><i class="fa fa-check"></i> Min $'.$rows['min_price'].'</div>
                                                 <div class="mins"><i class="fa fa-motorcycle"></i> 30 min</div>
                                                 <div class="ratings"> <span>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                        </span> (122) </div>
+                                                        '.rating_star($rows['rating']).'
+                                                        </span> ('.$rows['count'].') </div>
                                             </div>
                                         </div>
                                         <!-- end:col -->
@@ -330,13 +325,12 @@ session_start(); //start temp session until logout/browser closed
 <script src="js/jquery.min.js"></script>
 <script src="js/tether.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/animsition.min.js"></script>
 <script src="js/bootstrap-slider.min.js"></script>
 <script src="js/jquery.isotope.min.js"></script>
 <script src="js/headroom.js"></script>
 <script src="js/get_distance.js"></script>
 <script src="js/review.js"></script>
-<script src="js/foodpicky.min.js"></script>
+<script src="js/thegreen.js"></script>
 </body>
 
 </html>
