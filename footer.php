@@ -3,7 +3,7 @@
         <!-- top footer statrs -->
         <div class="row top-footer">
             <div class="col-xs-12 col-sm-3 footer-logo-block color-gray">
-                <a href="#"> <img src="images/food-picky-logo.png" alt="Footer logo"> </a> <span>Order Delivery &amp; Take-Out </span>
+                <a href="#"> <img src="images/the-green-logo.png" style="height: 35px" alt="Footer logo"> </a> <span>Savor the flavor of vegetarian cuisine! </span>
             </div>
             <div class="col-xs-12 col-sm-2 about color-gray">
                 <h5>About Us</h5>
@@ -77,7 +77,7 @@
                 <div class="col-xs-12 col-sm-4 address color-gray">
                     <h5>Address</h5>
                     <p>Concept design of oline food order and deliveye,planned as restaurant directory</p>
-                    <h5>Phone: <a href="tel:+080000012222">080 000012 222</a></h5></div>
+                    <h5>Phone: <a href="tel:+814508451">0914 508 451</a></h5></div>
                 <div class="col-xs-12 col-sm-5 additional-info color-gray">
                     <h5>Addition informations</h5>
                     <p>Join the thousands of other restaurants who benefit from having their menus on TakeOff</p>

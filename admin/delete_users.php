@@ -5,6 +5,7 @@ session_start();
 
 
 // sending query
+mysqli_query($db,"DELETE FROM dishes_feedbacks WHERE u_id = '".$_GET['user_del']."'");
 mysqli_query($db,"DELETE FROM users WHERE u_id = '".$_GET['user_del']."'");
 header("location:all_users.php");
 

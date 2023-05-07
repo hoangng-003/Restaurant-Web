@@ -127,7 +127,7 @@ include_once 'product-action.php'; //including controller
                     <div class="collapse in" id="popular2">
                         <?php // display values and item of food/dishes
                         if (isset($_GET["name"])) {
-                            $query_food = $db->prepare("select * from dishes where title like '%${_GET["name"]}%'");
+                            $query_food = $db->prepare("select *, getDishReviewCount(d_id) as count from dishes where title like '%${_GET["name"]}%'");
                             $query_food->execute();
                             $products = $query_food->get_result();
 
@@ -167,7 +167,7 @@ include_once 'product-action.php'; //including controller
                                                 <div class="rest-descr">
                                                     <h6><a href="#"><?php echo $product['title']; ?></a></h6>
                                                     <p> <?php echo $product['slogan']; ?></p>
-                                                    <button type="button" class="openModal" d_id='<?php echo $product['d_id']; ?>'>Reviews</button>
+                                                    <button type="button" class="openModal" d_id='<?php echo $product['d_id']; ?>'><?php echo $product['count']; ?> Reviews</button>
                                                 </div>
                                                 <!-- end:Description -->
                                         </div>
@@ -264,36 +264,6 @@ include_once 'product-action.php'; //including controller
         <!-- end:row -->
     </div>
     <!-- end:Container -->
-    <section class="app-section">
-        <div class="app-wrap">
-            <div class="container">
-                <div class="row text-img-block text-xs-left">
-                    <div class="container">
-                        <div class="col-xs-12 col-sm-6 hidden-xs-down right-image text-center">
-                            <figure><img src="images/app.png" alt="Right Image"></figure>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 left-text">
-                            <h3>The Best Food Delivery App</h3>
-                            <p>Now you can make food happen pretty much wherever you are thanks to the free easy-to-use
-                                Food Delivery &amp; Takeout App.</p>
-                            <div class="social-btns">
-                                <a href="#" class="app-btn apple-button clearfix">
-                                    <div class="pull-left"><i class="fa fa-apple"></i></div>
-                                    <div class="pull-right"><span class="text">Available on the</span> <span
-                                                class="text-2">App Store</span></div>
-                                </a>
-                                <a href="#" class="app-btn android-button clearfix">
-                                    <div class="pull-left"><i class="fa fa-android"></i></div>
-                                    <div class="pull-right"><span class="text">Available on the</span> <span
-                                                class="text-2">Play store</span></div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- start: FOOTER -->
     <?php include_once ("footer.php")?>

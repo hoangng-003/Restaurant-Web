@@ -28,6 +28,7 @@ if (isset($_POST['submit'])) {
     <title>Orders</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -80,21 +81,29 @@ if (isset($_POST['submit'])) {
             color: #777;
         }
 
+        .order-table .row{
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+            -moz-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+            -webkit-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+            -o-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+            -ms-box-shadow: 0 0 40px 0 rgba(0,0,0,.15)
+        }
 
         table {
             width: 750px;
             border-collapse: collapse;
             margin: auto;
-
         }
 
         /* Zebra striping */
         tr:nth-of-type(odd) {
-            background: #eee;
+            /*background: #eee;*/
         }
 
         th {
-            background: #60ba62;
+            background: var(--gray1-9);
             color: white;
             font-weight: bold;
 
@@ -102,10 +111,9 @@ if (isset($_POST['submit'])) {
 
         td, th {
             padding: 10px;
-            border: 1px solid #ccc;
+            /*border: 1px solid var(--primary-color);*/
             text-align: left;
             font-size: 14px;
-
         }
 
         /*
@@ -246,9 +254,9 @@ if (isset($_POST['submit'])) {
 
                                 <?php
                                 // displaying current session user login orders
-                                $query_res = mysqli_query($db, "select * from users_orders where u_id='" . $_SESSION['user_id'] . "'");
+                                $query_res = mysqli_query($db, "select *, date(date) as dmy, TIME_FORMAT(date,'%H:%i:%s') as hms from users_orders where u_id='" . $_SESSION['user_id'] . "'");
                                 if (!mysqli_num_rows($query_res) > 0) {
-                                    echo '<td colspan="6"><center>You have No orders Placed yet. </center></td>';
+                                    echo '<td colspan="6" style="text-align: center;">You have No orders Placed yet. </td>';
                                 } else {
 
                                     while ($row = mysqli_fetch_array($query_res)) {
@@ -263,23 +271,16 @@ if (isset($_POST['submit'])) {
                                                 $status = $row['status'];
                                                 if ($status == "" or $status == "NULL") {
                                                     ?>
-                                                    <button type="button" class="btn btn-info"
-                                                            style="font-weight:bold;">Dispatch
-                                                    </button>
+                                                    <span class="badge badge-pill badge-secondary">Dispatch</span>
                                                     <?php
                                                 }
                                                 if ($status == "in process") { ?>
-                                                    <button type="button" class="btn btn-warning"><span
-                                                                class="fa fa-cog fa-spin" aria-hidden="true"></span>On a
-                                                        Way!
-                                                    </button>
+                                                    <span class="badge badge-pill badge-warning">On a way!</span>
                                                     <?php
                                                 }
                                                 if ($status == "closed") {
                                                     ?>
-                                                    <button type="button" class="btn btn-success"><span
-                                                                class="fa fa-check-circle" aria-hidden="true">Delivered
-                                                    </button>
+                                                    <span class="badge badge-pill badge-success">Success</span>
                                                     <?php
                                                 }
                                                 ?>
@@ -294,7 +295,7 @@ if (isset($_POST['submit'])) {
                                                 ?>
 
                                             </td>
-                                            <td data-column="Date"> <?php echo $row['date']; ?></td>
+                                            <td data-column="Date"> <?php echo $row['hms']."<br>".$row['dmy']; ?></td>
                                             <td data-column="Action"><a
                                                         href="delete_orders.php?order_del=<?php echo $row['o_id']; ?>"
                                                         onclick="return confirm('Are you sure you want to cancel your order?');"
@@ -329,38 +330,9 @@ if (isset($_POST['submit'])) {
 
             </div>
         </div>
+    </section>
 </div>
-</section>
-<section class="app-section">
-    <div class="app-wrap">
-        <div class="container">
-            <div class="row text-img-block text-xs-left">
-                <div class="container">
-                    <div class="col-xs-12 col-sm-6 hidden-xs-down right-image text-center">
-                        <figure><img src="images/app.png" alt="Right Image"></figure>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 left-text">
-                        <h3>The Best Food Delivery App</h3>
-                        <p>Now you can make food happen pretty much wherever you are thanks to the free easy-to-use Food
-                            Delivery &amp; Takeout App.</p>
-                        <div class="social-btns">
-                            <a href="#" class="app-btn apple-button clearfix">
-                                <div class="pull-left"><i class="fa fa-apple"></i></div>
-                                <div class="pull-right"><span class="text">Available on the</span> <span class="text-2">App Store</span>
-                                </div>
-                            </a>
-                            <a href="#" class="app-btn android-button clearfix">
-                                <div class="pull-left"><i class="fa fa-android"></i></div>
-                                <div class="pull-right"><span class="text">Available on the</span> <span class="text-2">Play store</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <!-- start: FOOTER -->
 <?php
 include_once("./footer.php");

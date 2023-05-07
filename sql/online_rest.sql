@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2023 at 01:11 AM
+-- Generation Time: May 07, 2023 at 01:14 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -25,7 +25,7 @@ DELIMITER $$
 --
 -- Functions
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `getFeedbackRating` (`d_id_` INT) RETURNS DOUBLE  begin
+CREATE DEFINER=`root`@`localhost` FUNCTION `getDishFeedbackRating` (`d_id_` INT) RETURNS DOUBLE  begin
 	DECLARE result double DEFAULT 0;
     DECLARE result_ceiling double DEFAULT 0;
     DECLARE result_offset double DEFAULT 0;
@@ -42,6 +42,52 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `getFeedbackRating` (`d_id_` INT) RET
     end;
     return result;
 end$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `getDishReviewCount` (`d_id_` INT) RETURNS INT(11)  BEGIN
+	DECLARE	result INT DEFAULT 0;
+    SELECT COUNT(*) INTO result
+    FROM dishes_feedbacks
+    WHERE d_id=d_id_;
+    return result;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `getMinDishPrice` (`rs_id_` INT) RETURNS DOUBLE  BEGIN
+	DECLARE result double DEFAULT 0;
+    SELECT min(d.price) into result
+    FROM dishes d
+	JOIN dishes_feedbacks df on df.d_id = d.d_id
+    WHERE d.rs_id = rs_id_;
+    return result;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `getRestFeedbackRating` (`rs_id_` INT) RETURNS DOUBLE  BEGIN
+	DECLARE result double DEFAULT 0;
+    DECLARE result_ceiling double DEFAULT 0;
+    DECLARE result_offset double DEFAULT 0;
+    
+    SELECT ROUND(SUM(df.rating_value)/SUM(if(df.rating_value = 0, 0, 1)), 2) into result
+    FROM dishes d
+	JOIN dishes_feedbacks df on df.d_id = d.d_id
+    WHERE d.rs_id = rs_id_;
+    set result_ceiling = ceiling(result);
+    set result_offset = result_ceiling - result;
+    set result = CASE
+    	when result_offset <= 0.25 then result_ceiling
+        when result_offset <= 0.75 then result_ceiling - 0.5
+        else result_ceiling-1
+    end;
+    return result;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `getRestReviewCount` (`rs_id_` INT) RETURNS DOUBLE  BEGIN
+	DECLARE result double DEFAULT 0;
+    
+    SELECT count(*) into result
+    FROM dishes d
+	JOIN dishes_feedbacks df on df.d_id = d.d_id
+    WHERE d.rs_id = rs_id_;
+    return result;
+END$$
 
 DELIMITER ;
 
@@ -106,15 +152,6 @@ CREATE TABLE `dishes` (
   `img` varchar(222) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `dishes`
---
-
-INSERT INTO `dishes` (`d_id`, `rs_id`, `title`, `slogan`, `price`, `img`) VALUES
-(18, 55, 'Com tam', 'ngon vcl', '100.00', '644c0fefd1ab1.png'),
-(19, 55, 'Com rang dua bo', 'ngon', '20.00', '644cdabf56c54.jpg'),
-(21, 56, 'Pizza', 'pazzi', '95.00', '644d2cdab3a5a.jpg');
-
 -- --------------------------------------------------------
 
 --
@@ -128,32 +165,6 @@ CREATE TABLE `dishes_feedbacks` (
   `rating_value` int(222) DEFAULT NULL,
   `feedback` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `dishes_feedbacks`
---
-
-INSERT INTO `dishes_feedbacks` (`df_id`, `u_id`, `d_id`, `rating_value`, `feedback`) VALUES
-(4, 35, 18, 2, 'tạm được'),
-(10, 33, 18, 3, ''),
-(11, 33, 18, 4, ''),
-(12, 33, 18, 2, ''),
-(13, 33, 18, 5, ''),
-(14, 33, 21, 3, ''),
-(15, 33, 21, 5, ''),
-(16, 33, 21, 2, ''),
-(17, 33, 21, 0, 'ngon'),
-(18, 33, 18, 0, 'được'),
-(19, 33, 18, 5, ''),
-(20, 33, 18, 5, ''),
-(21, 33, 21, 1, ''),
-(22, 33, 18, 5, ''),
-(23, 33, 21, 3, ''),
-(24, 33, 21, 4, ''),
-(25, 33, 21, 2, ''),
-(26, 33, 21, 2, ''),
-(27, 33, 21, 2, ''),
-(28, 33, 19, 4, '');
 
 -- --------------------------------------------------------
 
@@ -184,7 +195,10 @@ INSERT INTO `remark` (`id`, `frm_id`, `status`, `remark`, `remarkDate`) VALUES
 (69, 37, 'rejected', 'if admin cancel for any reason this box is for remark only for buter perposes', '2018-04-18 19:51:19'),
 (70, 37, 'closed', 'delivered success', '2018-04-18 19:51:50'),
 (71, 43, 'closed', 'ok', '2023-04-29 04:01:32'),
-(72, 45, 'closed', 'done', '2023-04-29 08:51:05');
+(72, 45, 'closed', 'done', '2023-04-29 08:51:05'),
+(73, 65, 'closed', 'done', '2023-05-03 14:53:50'),
+(74, 66, 'closed', 'done', '2023-05-06 14:51:59'),
+(75, 68, 'in process', 'ok', '2023-05-06 16:22:18');
 
 -- --------------------------------------------------------
 
@@ -209,14 +223,6 @@ CREATE TABLE `restaurant` (
   `longitude` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `restaurant`
---
-
-INSERT INTO `restaurant` (`rs_id`, `c_id`, `title`, `email`, `phone`, `url`, `o_hr`, `c_hr`, `o_days`, `address`, `image`, `date`, `latitude`, `longitude`) VALUES
-(55, 5, 'SquareK', 'abc@email.com', '0974318794', 'www.facebook.com', '6am', '8pm', '24hr-x7', 'bi mat', '644ce7228c52b.jpg', '2023-04-29 14:01:19', 21.032229, 105.786495),
-(56, 6, 'Flamenco', 'flamenco@email.com', '999999999', 'flamenco.com', '7am', '7pm', 'mon-sat', 'So 5, Van Tien Dung', '644d2ca4bc8ec.jpg', '2023-04-29 14:41:40', 21.0481329, 105.7487021);
-
 -- --------------------------------------------------------
 
 --
@@ -228,17 +234,6 @@ CREATE TABLE `res_category` (
   `c_name` varchar(222) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `res_category`
---
-
-INSERT INTO `res_category` (`c_id`, `c_name`, `date`) VALUES
-(5, 'grill', '2018-04-14 18:45:28'),
-(6, 'pizza', '2018-04-14 18:44:56'),
-(7, 'pasta', '2018-04-14 18:45:13'),
-(8, 'thaifood', '2018-04-14 18:32:56'),
-(9, 'fish', '2018-04-14 18:44:33');
 
 -- --------------------------------------------------------
 
@@ -259,14 +254,6 @@ CREATE TABLE `users` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`u_id`, `username`, `f_name`, `l_name`, `email`, `phone`, `password`, `address`, `status`, `date`) VALUES
-(33, 'duykhanhxx03', 'Khanh', 'Tran Duy', 'duykhanhxx03@gmail.com', '0914508451', 'c87f31787f1020520ef13a45f6640c5e', 'KTX Ngoại ngữ', 1, '2023-05-01 03:01:36'),
-(35, 'tunoxy', 'Duy Khánh', 'Trần Duy', 'duykhanhtest1@gmail.com', '0999999999', 'c87f31787f1020520ef13a45f6640c5e', 'Thái Nguyên', 1, '2023-05-01 03:01:19');
-
 -- --------------------------------------------------------
 
 --
@@ -283,16 +270,6 @@ CREATE TABLE `users_orders` (
   `status` varchar(222) DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `users_orders`
---
-
-INSERT INTO `users_orders` (`o_id`, `u_id`, `d_id`, `title`, `quantity`, `price`, `status`, `date`) VALUES
-(65, 33, 18, 'Com tam', 1, '100.00', NULL, '2023-05-01 06:30:54'),
-(66, 33, 21, 'Pizza', 2, '95.00', NULL, '2023-05-01 06:45:32'),
-(67, 35, 18, 'Com tam', 1, '100.00', NULL, '2023-05-01 20:20:37'),
-(68, 33, 19, 'Com rang dua bo', 1, '20.00', NULL, '2023-05-02 04:27:34');
 
 --
 -- Indexes for dumped tables
@@ -320,7 +297,8 @@ ALTER TABLE `dishes`
 -- Indexes for table `dishes_feedbacks`
 --
 ALTER TABLE `dishes_feedbacks`
-  ADD PRIMARY KEY (`df_id`);
+  ADD PRIMARY KEY (`df_id`),
+  ADD KEY `u_id` (`u_id`);
 
 --
 -- Indexes for table `remark`
@@ -372,19 +350,19 @@ ALTER TABLE `admin_codes`
 -- AUTO_INCREMENT for table `dishes`
 --
 ALTER TABLE `dishes`
-  MODIFY `d_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `d_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `dishes_feedbacks`
 --
 ALTER TABLE `dishes_feedbacks`
-  MODIFY `df_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `df_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `remark`
 --
 ALTER TABLE `remark`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `restaurant`
@@ -408,7 +386,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_orders`
 --
 ALTER TABLE `users_orders`
-  MODIFY `o_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `o_id` int(222) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `dishes_feedbacks`
+--
+ALTER TABLE `dishes_feedbacks`
+  ADD CONSTRAINT `dishes_feedbacks_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `users` (`u_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

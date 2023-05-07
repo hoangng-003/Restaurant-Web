@@ -26,7 +26,7 @@ session_start();
 
 <body>
 <!--header starts-->
-<?php include_once ("./header.php")?>
+<?php include_once("./header.php") ?>
 <div class="page-wrapper">
     <!-- top Links -->
     <div class="top-links">
@@ -58,46 +58,46 @@ session_start();
     <section class="restaurants-page">
         <div class="container">
             <div class="row rest__container">
-<!--                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-3">-->
-                    <div class="widget clearfix">
-                        <!-- /widget heading -->
-                        <div class="widget-heading">
-                            <h3 class="widget-title text-dark">
-                                Popular tags
-                            </h3>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="widget-body">
-                            <ul class="tags">
-                                <li><a href="#" class="tag">
-                                        Pizza
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Sendwich
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Sendwich
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Fish
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Desert
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Salad
-                                    </a></li>
-                            </ul>
-                        </div>
+                <!--                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-3">-->
+                <div class="widget clearfix">
+                    <!-- /widget heading -->
+                    <div class="widget-heading">
+                        <h3 class="widget-title text-dark">
+                            Popular tags
+                        </h3>
+                        <div class="clearfix"></div>
                     </div>
-                    <!-- end:Widget -->
-<!--                </div>-->
-<!--                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-9">-->
-                    <div class="bg-gray restaurant-entry">
-                        <div class="row">
-                            <?php $ress = mysqli_query($db, "select getRestFeedbackRating(rs.rs_id) as rating, getRestReviewCount(rs.rs_id) as count, getMinDishPrice(rs.rs_id) as min_price, rs.* from restaurant rs");
-                            while ($rows = mysqli_fetch_array($ress)) {
-                                echo ' <div class="col-sm-12 col-md-12 col-lg-8 text-xs-center text-sm-left">
+                    <div class="widget-body">
+                        <ul class="tags">
+                            <li><a href="#" class="tag">
+                                    Pizza
+                                </a></li>
+                            <li><a href="#" class="tag">
+                                    Sendwich
+                                </a></li>
+                            <li><a href="#" class="tag">
+                                    Sendwich
+                                </a></li>
+                            <li><a href="#" class="tag">
+                                    Fish
+                                </a></li>
+                            <li><a href="#" class="tag">
+                                    Desert
+                                </a></li>
+                            <li><a href="#" class="tag">
+                                    Salad
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end:Widget -->
+                <!--                </div>-->
+                <!--                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-9">-->
+                <div class="bg-gray restaurant-entry">
+                    <div class="row">
+                        <?php $ress = mysqli_query($db, "select getRestFeedbackRating(rs.rs_id) as rating, getRestReviewCount(rs.rs_id) as count, getMinDishPrice(rs.rs_id) as min_price, rs.* from restaurant rs");
+                        while ($rows = mysqli_fetch_array($ress)) {
+                            echo ' <div class="col-sm-12 col-md-12 col-lg-8 text-xs-center text-sm-left">
 															<div class="entry-logo">
 																<a class="img-fluid" href="dishes.php?res_id=' . $rows['rs_id'] . '" > <img src="admin/Res_img/' . $rows['image'] . '" alt="Food logo"></a>
 															</div>
@@ -105,7 +105,7 @@ session_start();
 															<div class="entry-dscr">
 																<h5><a href="dishes.php?res_id=' . $rows['rs_id'] . '" >' . $rows['title'] . '</a></h5> <span>' . $rows['address'] . ' <a href="#">...</a></span>
 																<ul class="list-inline">
-																	<li class="list-inline-item"><i class="fa fa-check"></i> Min $'.$rows['min_price'].'</li>
+																	<li class="list-inline-item"><i class="fa fa-check"></i> Min $' . $rows['min_price'] . '</li>
 																	<li class="list-inline-item"><i class="fa fa-motorcycle"></i> 30 min</li>
 																</ul>
 															</div>
@@ -116,59 +116,30 @@ session_start();
 																<div class="right-content bg-white">
 																	<div class="right-review">
 																		<div class="rating-block">
-																		 '.rating_star($rows['rating']).'
+																		 ' . rating_star($rows['rating']) . '
 																    </div>
-																		<p> '.$rows['count'].' Reviews</p> <a href="dishes.php?res_id=' . $rows['rs_id'] . '" class="btn theme-btn-dash">View Menu</a> </div>
+																		<p> ' . $rows['count'] . ' Reviews</p> <a href="dishes.php?res_id=' . $rows['rs_id'] . '" class="btn theme-btn-dash">View Menu</a> </div>
 																</div>
 																<!-- end:right info -->
 															</div>';
-                            }
+                        }
 
 
-                            ?>
+                        ?>
 
-                        </div>
-                        <!--end:row -->
                     </div>
-
-<!--                </div>-->
-            </div>
-        </div>
-</div>
-</section>
-<section class="app-section">
-    <div class="app-wrap">
-        <div class="container">
-            <div class="row text-img-block text-xs-left">
-                <div class="container">
-                    <div class="col-xs-12 col-sm-6 hidden-xs-down right-image text-center">
-                        <figure><img src="images/app.png" alt="Right Image"></figure>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 left-text">
-                        <h3>The Best Food Delivery App</h3>
-                        <p>Now you can make food happen pretty much wherever you are thanks to the free easy-to-use Food
-                            Delivery &amp; Takeout App.</p>
-                        <div class="social-btns">
-                            <a href="#" class="app-btn apple-button clearfix">
-                                <div class="pull-left"><i class="fa fa-apple"></i></div>
-                                <div class="pull-right"><span class="text">Available on the</span> <span class="text-2">App Store</span>
-                                </div>
-                            </a>
-                            <a href="#" class="app-btn android-button clearfix">
-                                <div class="pull-left"><i class="fa fa-android"></i></div>
-                                <div class="pull-right"><span class="text">Available on the</span> <span class="text-2">Play store</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    <!--end:row -->
                 </div>
+
+                <!--                </div>-->
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
+
 <!-- start: FOOTER -->
 <?php
-include_once ("./footer.php");
+include_once("./footer.php");
 ?>
 <!-- end:Footer -->
 </div>

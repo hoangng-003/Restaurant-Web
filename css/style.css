@@ -1,11 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700|Give+You+Glory);
+@import url('https://fonts.cdnfonts.com/css/great-slave');
 
-/*------------------------------------------------------------------
-Theme Name: Foodpicky - Responsive Bootstrap Restaurants Directory template Online food ordering 
-Version: 1.0
-Author: codenpixel.com  
-Contact: info@codenpixel.com
--------------------------------------------------------------------*/
+      /*------------------------------------------------------------------
+      Theme Name: Foodpicky - Responsive Bootstrap Restaurants Directory template Online food ordering
+      Version: 1.0
+      Author: codenpixel.com
+      Contact: info@codenpixel.com
+      -------------------------------------------------------------------*/
 
 
 /* Table of Content
@@ -34,6 +34,27 @@ Contact: info@codenpixel.com
 
 :root{
     --primary-color: #60ba62;
+    --gray1-0: #f8faf8;
+    --gray1-1: #eaefea;
+    --gray1-2: #dbe3db;
+    --gray1-3: #cbd6cb;
+    --gray1-4: #b8c8b8;
+    --gray1-5: #a4b8a4;
+    --gray1-6: #8da68d;
+    --gray1-7: #769076;
+    --gray1-8: #5d715d;
+    --gray1-9: #364236;
+
+    --gray2-0: #f7faf4;
+    --gray2-1: #e7f1de;
+    --gray2-2: #d6e6c6;
+    --gray2-3: #c3dbab;
+    --gray2-4: #adce8e;
+    --gray2-5: #adce8e;
+    --gray2-6: #82ac59;
+    --gray2-7: #6f944c;
+    --gray2-8: #58753c;
+    --gray2-9: #334423;
 }
 
 body {
@@ -61,8 +82,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Source Sans Pro", sans-serif;
-    color: #25282b;
+    color: var(--gray1-9);
 }
 
 a {
@@ -124,6 +144,7 @@ hr {
 .page-wrapper {
     padding-top: 68px;
     /* Used for inpper pages if navigation fixed to the top */
+    margin-bottom: 45px;
 }
 
 .inner-page {
@@ -202,7 +223,7 @@ hr {
 .btn-group-lg>.btn,
 .btn-lg,
 .img-rounded {
-    border-radius: 2px;
+    border-radius: 10px;
 }
 
 .btn {
@@ -223,7 +244,7 @@ hr {
 }
 
 .theme-btn-dash {
-    border: 2px dashed var(--primary-color);
+    border: 2px solid var(--primary-color);
     background-color: transparent;
     color: var(--primary-color);
 
@@ -526,10 +547,13 @@ div#mainNavbarCollapse {
 }
 
 .hero h1 {
-    font-family: "Give You Glory", cursive;
-    color: #fff;
-    font-size: 3.7em;
-    font-weight: 700;
+    font-family: 'Great Slave', sans-serif;
+    color: var(--gray1-1);
+    font-size: 4.7em;
+    font-weight: initial;
+}
+.hero h5.space-xs{
+    color: var(--gray1-1);
 }
 
 .hero:before {
@@ -621,7 +645,6 @@ div#mainNavbarCollapse {
 }
 
 .step-item h4 {
-    font-family: "Give You Glory", cursive;
     color: #fff;
     font-size: 21px;
 }
@@ -693,11 +716,12 @@ div#mainNavbarCollapse {
 ============================*/
 
 .popular {
-    padding: 70px 0 90px;
+    padding: 0 0 90px;
     background-size: 100%;
 }
 
 .food-item-wrap {
+    color: var(--gray1-9);
     border: 1px solid #eaebeb;
     border-radius: 2px;
     overflow: hidden;
@@ -708,7 +732,7 @@ div#mainNavbarCollapse {
 }
 
 .food-item-wrap h5 a {
-    color: #25282b;
+    color: var(--gray1-9);
     font-size: 21px;
     font-weight: 600;
 }
@@ -724,7 +748,7 @@ div#mainNavbarCollapse {
 .food-item-wrap .price {
     font-size: 21px;
     font-weight: 700;
-    color: #000;
+    color: var(--gray1-9);
     margin-top: 4px;
     display: inline-block;
 }
@@ -822,16 +846,6 @@ div#mainNavbarCollapse {
     width: 100%;
 }
 
-.food-item-wrap .figure-wrap:after {
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    content: "";
-    background: url(../images/zig-zag.png);
-    width: 100%;
-    height: 5px;
-}
-
 .food-item-wrap:hover h5>a,
 .food-item-wrap:hover .right-text>a {
     color: var(--primary-color);
@@ -860,7 +874,7 @@ div#mainNavbarCollapse {
 
 .food-item-wrap .distance {
     background: var(--primary-color);
-    border-radius: 3px;
+    border-radius: 10px;
     color: #fff;
     font-size: 12px;
     padding: 0 10px;
@@ -872,23 +886,21 @@ div#mainNavbarCollapse {
 
 .food-item-wrap .rating i {
     color: #ffd953;
-    font-size: 16px;
+    font-size: 14px;
+    margin-left: 4px;
 }
 
-.food-item-wrap .rating .fa-star-o {
-    font-size: 17px;
-}
 
 .food-item-wrap .rating {
     position: absolute;
-    bottom: 30px;
-    left: 20px;
+    bottom: 10px;
+    right: 10px;
 }
 
 .food-item-wrap .review {
     right: 30px;
     position: absolute;
-    bottom: 30px;
+    /*bottom: 30px;*/
 }
 
 .food-item-wrap .review a {
@@ -993,6 +1005,10 @@ div#mainNavbarCollapse {
     margin-left: 80px;
 }
 
+.food-item .rest-descr p{
+    margin-bottom: 0.5em;
+}
+
 .cart-addon .food-item h6 {
     /* margin: 0 0 2px 0; */
 }
@@ -1045,9 +1061,7 @@ How it works section
 -----------------------------------*/
 
 .how-it-works {
-    background-image: url(../images/city.png), url(../images/pattern.png);
-    background-repeat: repeat-x, repeat;
-    background-position: bottom, center;
+    background: linear-gradient(148deg, rgba(96, 186, 98, 0.9) 0%, rgba(140, 191, 141, 0.9) 48%, rgba(96, 186, 98, 0.9) 100%);
     padding: 90px 0;
     position: relative;
 }
@@ -1063,7 +1077,7 @@ How it works section
 }
 
 .how-it-works .text-xs-center>h2 {
-    color: #d8bea5;
+    color: var(--gray1-1);
     margin-bottom: 50px;
 }
 
@@ -1087,13 +1101,13 @@ How it works section
 
 .how-it-works p.pay-info {
     font-size: 16px;
-    color: #d8bea5;
+    color: var(--gray1-1);
     margin-top: 25px;
     text-align: center;
 }
 
 .how-it-works h3 {
-    color: #fff
+    color: var(--gray1-1);
 }
 
 
@@ -1102,7 +1116,7 @@ Steps
 -----------------------------------*/
 
 .how-it-works p {
-    color: #9c9da5;
+    color: var(--gray1-1);
 }
 
 .step .icon {
@@ -1128,7 +1142,6 @@ Steps
     background-color: var(--primary-color);
     border-radius: 50%;
     font-size: 1.5em;
-    font-family: "Give You Glory", cursive;
     font-weight: 700;
     color: #fff;
 }
@@ -1222,16 +1235,6 @@ Steps
     }
 }
 
-.featured-restaurants:before {
-    position: absolute;
-    top: -81px;
-    left: 50px;
-    background: url(../images/chilly.png);
-    width: 103px;
-    height: 151px;
-    content: "";
-}
-
 @media (min-width: 280px) and (max-width: 580px) {
     .featured-restaurants:before {
         display: none
@@ -1240,11 +1243,12 @@ Steps
 
 .featured-restaurants .restaurant-wrap {
     border: 1px solid #eaebeb;
-    border-radius: 3px;
+    border-radius: 10px;
     padding: 15px;
     background: #fafaf8;
     float: left;
     width: 100%;
+}
 }
 
 .featured-restaurants .restaurant-logo {
@@ -1255,6 +1259,7 @@ Steps
     width: 95px;
     height: auto;
     border: 1px solid #eaebeb;
+    border-radius: 2px;
 }
 
 @media (min-width: 320px) and (max-width: 543px) {
@@ -1372,132 +1377,6 @@ Steps
 
 @media (min-width: 1200px) {}
 
-
-/*-----------------------------------  
-App section
------------------------------------*/
-
-.app-section {
-    padding-top: 35px;
-    position: relative
-}
-
-.app-section:after {
-    content: "";
-    background: url(../images/city-2.png) center bottom;
-    background-color: var(--primary-color);
-    display: block;
-    position: absolute;
-    top: 100px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    background-repeat: repeat-x;
-}
-
-.app-wrap {
-    position: relative;
-    z-index: 2
-}
-
-@media (min-width: 280px) and (max-width: 568px) {
-    .app-wrap {
-        padding-bottom: 30px
-    }
-}
-
-.app-wrap figure {
-    margin: 0;
-    text-align: center;
-}
-
-.app-wrap .left-text {
-    padding-top: 110px;
-}
-
-.app-wrap .left-text h3,
-.app-wrap .left-text p {
-    color: #fff;
-}
-
-
-/* ==========================
-*  Download app buttons
-============================*/
-
-.app-btn {
-    color: #FFFFFF;
-    float: left;
-    margin-right: 15px;
-    background: #81858b;
-    margin-top: 5px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 2px;
-    transition: all .3s;
-}
-
-.app-btn i {
-    font-size: 38px;
-    line-height: 50px;
-    margin: 0;
-    padding: 0 18px;
-}
-
-.app-btn .pull-right {
-    padding: 8px 25px 8px 10px;
-}
-
-.app-btn .text {
-    display: block;
-    font-size: 12px;
-    line-height: 1;
-}
-
-.app-btn:hover,
-.app-btn:active,
-.app-btn:focus {
-    color: #FFFFFF;
-    background: #111111;
-}
-
-.android-button {
-    background: #82b21c;
-}
-
-@media (min-width: 348px) and (max-width: 767px) {
-    .app-section {
-        padding: 55px 0;
-    }
-    .text-img-block figure {
-        display: none
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    .app-wrap .left-text {
-        padding-top: 100px;
-        font-size: 80%;
-    }
-    .app-btn i {
-        font-size: 28px;
-        line-height: 41px;
-        margin: 0;
-        padding: 0 18px;
-    }
-    .app-btn {
-        padding-right: 5px
-    }
-    .app-btn .pull-right {
-        padding: 7px 14px 0 5px
-    }
-    .app-btn i {
-        padding: 0 10px;
-    }
-}
-
-
 /* ==========================
 *  Footer
 ============================*/
@@ -1516,7 +1395,6 @@ footer {
 
 footer h5 {
     color: #fff;
-    font-family: "Source Sans Pro", sans-serif;
     margin-bottom: 15px;
 }
 
@@ -1535,7 +1413,7 @@ footer span {
 .address h5 a {
     color: var(--primary-color);
     font-size: 26px;
-    font-family: "Give You Glory", cursive;
+    font-family: 'Great Slave', sans-serif;
     margin-left: 20px;
     font-weight: 600;
 }
@@ -1771,10 +1649,8 @@ footer li a {
 }
 
 .result-show {
-    padding: 7px 0 10px;
-    border-bottom: 1px solid #eaebeb;
     color: #333366;
-    margin-bottom: 20px;
+    margin-bottom: 45px;
 }
 
 .result-show p {
@@ -1829,6 +1705,10 @@ footer li a {
     color: #fff;
     border-radius: 3px;
     border-bottom: 1px solid #eaebeb;
+}
+
+.widget .widget-body .tags .tag{
+    border-radius: 10px;
 }
 
 .menu-widget .widget-heading {
@@ -1960,6 +1840,7 @@ a.more-link {
     /*new*/
     border-radius: 10px;
     border: 3px #eaebeb solid;
+    margin-bottom: 45px;
 }
 
 .widget-body {
@@ -2150,7 +2031,6 @@ a[aria-expanded=false] .fa-angle-down {
     float: left;
     width: 110px;
     height: auto;
-    border: 1px solid #eaebeb;
     border-radius: 2px;
     margin-top: 15px;
     margin-left: 15px;
@@ -2830,7 +2710,7 @@ a[aria-expanded=false] .fa-angle-down {
 
 .counter {
     width: 150px;
-    margin: 1em auto;
+    margin: .5em auto;
     display: flex;
     align-items: center;
     justify-content: center;;
@@ -2870,3 +2750,67 @@ a[aria-expanded=false] .fa-angle-down {
     border-bottom-left-radius: 5px;
 }
 
+.badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 10px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.badge-success {
+    color: var(--gray1-1);
+    background-color: var(--gray2-6);
+}
+.badge-secondary {
+    color: var(--gray1-1);
+    background-color: #6c757d;
+}
+.badge-warning {
+    color: var(--gray1-1);
+    background-color: #ffc107;
+}
+.badge-light {
+    color: #212529;
+     backdrop-filter: blur(2em);
+    -webkit-backdrop-filter: blur(2em);
+}
+
+.food-item-wrap,
+.widget,
+.restaurant-wrap,
+.restaurant-entry,
+.menu-widget{
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+    -moz-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+    -webkit-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+    -o-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+    -ms-box-shadow: 0 0 40px 0 rgba(0,0,0,.15)
+}
+
+button.openModal{
+    background: none;
+    border: 1px var(--gray1-9) solid;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--gray1-9);
+}
+
+.btn.btn-danger{
+    color: var(--gray1-1);
+    background-color: #672523;
+    border-color: #672523;
+}
+
+.btn.btn-info{
+    color: var(--gray1-1);
+    background-color: #007b9f;
+    border-color: #007b9f;
+}
