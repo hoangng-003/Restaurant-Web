@@ -58,7 +58,7 @@
 }
 
 body {
-    background: rgba(252, 251, 249, 0.68);
+    background: var(--gray1-0);
     font-size: 16px;
     color: #4d4f56;
     font-weight: 400;
@@ -206,6 +206,25 @@ hr {
 .form-control {
     border: 1px solid #eaebeb;
     border-radius: 2px;
+}
+
+.form-group small {
+    color: #e74c3c;
+    /*position: absolute;*/
+    /*bottom: -20px;*/
+    /*left: 0;*/
+    visibility: hidden;
+    font-size: 12px;
+}
+.form-control.success {
+    border-color: var(--primary-color);
+}
+.form-group.error .form-control {
+    border-color: red;
+}
+
+.form-group.error small {
+    visibility: visible;
 }
 
 .custom-select {
@@ -645,12 +664,13 @@ div#mainNavbarCollapse {
 }
 
 .step-item h4 {
-    color: #fff;
+    color: var(--gray1-1);
     font-size: 21px;
+    text-transform: uppercase;
 }
 
 .step-item h4 span {
-    color: var(--primary-color);
+    color: var(--gray1-1);
 }
 
 .step1:after,
@@ -716,7 +736,7 @@ div#mainNavbarCollapse {
 ============================*/
 
 .popular {
-    padding: 0 0 90px;
+    padding: 90px 0 0;
     background-size: 100%;
 }
 
@@ -758,7 +778,7 @@ div#mainNavbarCollapse {
 }
 
 .food-item-wrap .content {
-    padding: 25px 15px 35px;
+    padding: 30px 15px 35px;
 }
 
 .food-item-wrap .restaurant-block {
@@ -866,12 +886,6 @@ div#mainNavbarCollapse {
     width: 87%;
 }
 
-.food-item-wrap .review {
-    margin-top: 5px;
-    font-size: 10px;
-    text-transform: uppercase;
-}
-
 .food-item-wrap .distance {
     background: var(--primary-color);
     border-radius: 10px;
@@ -898,9 +912,9 @@ div#mainNavbarCollapse {
 }
 
 .food-item-wrap .review {
-    right: 30px;
+    right: 8px;
+    bottom: -30px;
     position: absolute;
-    /*bottom: 30px;*/
 }
 
 .food-item-wrap .review a {
@@ -1079,6 +1093,7 @@ How it works section
 .how-it-works .text-xs-center>h2 {
     color: var(--gray1-1);
     margin-bottom: 50px;
+    text-transform: uppercase;
 }
 
 .how-it-works-wrap h2 {
@@ -1108,6 +1123,7 @@ How it works section
 
 .how-it-works h3 {
     color: var(--gray1-1);
+    text-transform: uppercase;
 }
 
 
@@ -1382,7 +1398,6 @@ Steps
 ============================*/
 
 footer {
-    background: url(../images/pattern.png)center repeat;
     padding: 90px 0;
     z-index: 1;
     position: relative;
@@ -1394,7 +1409,7 @@ footer {
 }
 
 footer h5 {
-    color: #fff;
+    color: var(--gray1-9);
     margin-bottom: 15px;
 }
 
@@ -1681,6 +1696,11 @@ footer li a {
 }
 .container .rest__container.row .widget{
     width: 20%;
+    height: fit-content;
+}
+.container .rest__container.row .bg-gray.restaurant-entry{
+    width: 80%;
+    margin-left: 1em;
 }
 
 @media (max-width: 62em) {
@@ -2797,10 +2817,15 @@ a[aria-expanded=false] .fa-angle-down {
 
 button.openModal{
     background: none;
-    border: 1px var(--gray1-9) solid;
+    border: 1px var(--primary-color) solid;
     border-radius: 10px;
     font-size: 12px;
-    color: var(--gray1-9);
+    color: var(--primary-color);
+    transition: 0.2s ease-in-out;
+}
+button.openModal:hover{
+    background: var(--primary-color);
+    color: white;
 }
 
 .btn.btn-danger{
@@ -2813,4 +2838,25 @@ button.openModal{
     color: var(--gray1-1);
     background-color: #007b9f;
     border-color: #007b9f;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--gray2-4);
+    border-radius:10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gray2-7);
 }

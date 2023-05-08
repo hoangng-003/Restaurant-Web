@@ -12,32 +12,19 @@ if (isset($_POST['submit'])) //if submit btn is pressed
         empty($_POST['email']) ||
         empty($_POST['phone']) ||
         empty($_POST['password']) ||
-        empty($_POST['cpassword']) ||
         empty($_POST['cpassword'])) {
-        $message = "All fields must be Required!";
+        $message = "All fields must be required!";
     } else {
-        //cheching username & email if already present
+        //checking username & email if already present
         $check_username = mysqli_query($db, "SELECT username FROM users where username = '" . $_POST['username'] . "' ");
         $check_email = mysqli_query($db, "SELECT email FROM users where email = '" . $_POST['email'] . "' ");
 
-
-        if ($_POST['password'] != $_POST['cpassword']) {  //matching passwords
-            $message = "Password not match";
-        } elseif (strlen($_POST['password']) < 6)  //cal password length
+        if (mysqli_num_rows($check_username) > 0)  //check username
         {
-            $message = "Password Must be >=6";
-        } elseif (strlen($_POST['phone']) < 10)  //cal phone length
-        {
-            $message = "invalid phone number!";
-        } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) // Validate email address
-        {
-            $message = "Invalid email address please type a valid email!";
-        } elseif (mysqli_num_rows($check_username) > 0)  //check username
-        {
-            $message = 'username Already exists!';
+            $message = 'Username already exists!';
         } elseif (mysqli_num_rows($check_email) > 0) //check email
         {
-            $message = 'Email Already exists!';
+            $message = 'Email already exists!';
         } else {
 
             //inserting values into db
@@ -45,17 +32,15 @@ if (isset($_POST['submit'])) //if submit btn is pressed
             mysqli_query($db, $mql);
             $success = "Account Created successfully! <p>You will be redirected in <span id='counter'>5</span> second(s).</p>
 														<script type='text/javascript'>
-														function countdown() {
-															var i = document.getElementById('counter');
-															if (parseInt(i.innerHTML)<=0) {
-																location.href = 'login.php';
-															}
-															i.innerHTML = parseInt(i.innerHTML)-1;
-														}
-														setInterval(function(){ countdown(); },1000);
+                                                            function countdown() {
+                                                                var i = document.getElementById('counter');
+                                                                if (parseInt(i.innerHTML)<=0) {
+                                                                    location.href = 'login.php';
+                                                                }
+                                                                i.innerHTML = parseInt(i.innerHTML)-1;
+                                                            }
+                                                            setInterval(function(){countdown();},1000);
 														</script>'";
-
-
             header("refresh:5;url=login.php"); // redireted once inserted success
         }
     }
@@ -84,7 +69,7 @@ if (isset($_POST['submit'])) //if submit btn is pressed
 </head>
 <body>
 
-<?php include_once ("./header.php")?>
+<?php include_once("./header.php") ?>
 
 <div class="page-wrapper">
     <div class="breadcrumb">
@@ -94,8 +79,7 @@ if (isset($_POST['submit'])) //if submit btn is pressed
                         <span style="color:red;"><?php echo $message; ?></span>
                         <span style="color:green;">
 								<?php echo $success; ?>
-										</span>
-
+                        </span>
                     </a></li>
 
             </ul>
@@ -109,50 +93,55 @@ if (isset($_POST['submit'])) //if submit btn is pressed
                     <div class="widget">
                         <div class="widget-body">
 
-                            <form action="" method="post">
+                            <form action="" method="post" onsubmit="return isValidate();">
                                 <div class="row">
                                     <div class="form-group col-sm-12">
-                                        <label for="exampleInputEmail1">User-Name</label>
-                                        <input class="form-control" type="text" name="username" id="example-text-input"
+                                        <label for="username-input">Username</label>
+                                        <input class="form-control" type="text" name="username" id="username-input"
                                                placeholder="UserName">
+                                        <small>Error message</small>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="exampleInputEmail1">First Name</label>
-                                        <input class="form-control" type="text" name="firstname" id="example-text-input"
+                                        <label for="first-name-input">First Name</label>
+                                        <input class="form-control" type="text" name="firstname" id="first-name-input"
                                                placeholder="First Name">
+                                        <small>Error message</small>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="exampleInputEmail1">Last Name</label>
+                                        <label for="last-name-input">Last Name</label>
                                         <input class="form-control" type="text" name="lastname"
-                                               id="example-text-input-2" placeholder="Last Name">
+                                               id="last-name-input" placeholder="Last Name">
+                                        <small>Error message</small>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="exampleInputEmail1">Email address</label>
-                                        <input type="text" class="form-control" name="email" id="exampleInputEmail1"
-                                               aria-describedby="emailHelp" placeholder="Enter email"> <small
-                                                id="emailHelp" class="form-text text-muted">We"ll never share your email
-                                            with anyone else.</small>
+                                        <label for="email-input">Email address</label>
+                                        <input type="text" class="form-control" name="email" id="email-input"
+                                               aria-describedby="emailHelp" placeholder="Enter email">
+                                        <small>Error message</small>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="exampleInputEmail1">Phone number</label>
-                                        <input class="form-control" type="text" name="phone" id="example-tel-input-3"
-                                               placeholder="Phone"> <small class="form-text text-muted">We"ll never
-                                            share your email with anyone else.</small>
+                                        <label for="tel-input">Phone number</label>
+                                        <input class="form-control" type="text" name="phone" id="tel-input"
+                                               placeholder="Phone">
+                                        <small>Error message</small>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="exampleInputPassword1">Password</label>
+                                        <label for="password1-input">Password</label>
                                         <input type="password" class="form-control" name="password"
-                                               id="exampleInputPassword1" placeholder="Password">
+                                               id="password1-input" placeholder="Password">
+                                        <small>Error message</small>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="exampleInputPassword1">Repeat password</label>
+                                        <label for="password2-input">Repeat password</label>
                                         <input type="password" class="form-control" name="cpassword"
-                                               id="exampleInputPassword2" placeholder="Password">
+                                               id="password2-input" placeholder="Password">
+                                        <small>Error message</small>
                                     </div>
                                     <div class="form-group col-sm-12">
-                                        <label for="exampleTextarea">Delivery Address</label>
-                                        <textarea class="form-control" id="exampleTextarea" name="address"
+                                        <label for="add-input">Delivery Address</label>
+                                        <textarea class="form-control" id="add-input" name="address"
                                                   rows="3"></textarea>
+                                        <small>Error message</small>
                                     </div>
 
                                 </div>
@@ -225,39 +214,9 @@ if (isset($_POST['submit'])) //if submit btn is pressed
             </div>
         </div>
     </section>
-    <section class="app-section">
-        <div class="app-wrap">
-            <div class="container">
-                <div class="row text-img-block text-xs-left">
-                    <div class="container">
-                        <div class="col-xs-12 col-sm-6  right-image text-center">
-                            <figure><img src="images/app.png" alt="Right Image"></figure>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 left-text">
-                            <h3>The Best Food Delivery App</h3>
-                            <p>Now you can make food happen pretty much wherever you are thanks to the free easy-to-use
-                                Food Delivery &amp; Takeout App.</p>
-                            <div class="social-btns">
-                                <a href="#" class="app-btn apple-button clearfix">
-                                    <div class="pull-left"><i class="fa fa-apple"></i></div>
-                                    <div class="pull-right"><span class="text">Available on the</span> <span
-                                                class="text-2">App Store</span></div>
-                                </a>
-                                <a href="#" class="app-btn android-button clearfix">
-                                    <div class="pull-left"><i class="fa fa-android"></i></div>
-                                    <div class="pull-right"><span class="text">Available on the</span> <span
-                                                class="text-2">Play store</span></div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- start: FOOTER -->
     <?php
-    include_once ("./footer.php");
+    include_once("./footer.php");
     ?>
     <!-- end:Footer -->
 </div>
@@ -272,6 +231,7 @@ if (isset($_POST['submit'])) //if submit btn is pressed
 <script src="js/jquery.isotope.min.js"></script>
 <script src="js/headroom.js"></script>
 <script src="js/thegreen.min.js"></script>
+<script src="js/registration.js"></script>
 </body>
 
 </html>

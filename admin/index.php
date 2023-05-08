@@ -9,11 +9,11 @@ if (!empty($_SESSION["adm_id"])) {
     header("refresh:0;url=dashboard.php");
 }
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['signin'])) {
     $username = htmlspecialchars($_POST['username']);
     $password = $_POST['password'];
 
-    if (!empty($_POST["submit"])) {
+    if (!empty($_POST["signin"])) {
         $login_query = "SELECT * FROM admin WHERE username='$username' && password='" . md5($password) . "'";
         $result = mysqli_query($db, $login_query);
         $row = mysqli_fetch_array($result);
@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-if (isset($_POST['submit1'])) {
+if (isset($_POST['signup'])) {
     if (empty($_POST['cr_user']) ||
         empty($_POST['cr_email']) ||
         empty($_POST['cr_pass']) ||
@@ -41,7 +41,6 @@ if (isset($_POST['submit1'])) {
 
         $check_code = mysqli_query($db, "SELECT adm_id FROM admin where code = '" . $_POST['code'] . "' ");
 
-
         if ($_POST['cr_pass'] != $_POST['cr_cpass']) {
             $message = "Password not match";
         } elseif (!filter_var($_POST['cr_email'], FILTER_VALIDATE_EMAIL)) // Validate email address
@@ -52,6 +51,7 @@ if (isset($_POST['submit1'])) {
         } elseif (mysqli_num_rows($check_email) > 0) {
             $message = 'Email Already exists!';
         }
+
         if (mysqli_num_rows($check_code) > 0)           // if code already exist
         {
             $message = "Unique Code Already Redeem!";
@@ -106,7 +106,7 @@ if (isset($_POST['submit1'])) {
         <input type="password" placeholder="password" name="cr_pass"/>
         <input type="password" placeholder="Confirm password" name="cr_cpass"/>
         <input type="password" placeholder="Unique-Code" name="code"/>
-        <input type="submit" name="submit1" value="Create"/>
+        <input type="submit" name="signup" value="Create"/>
         <p class="message">Already registered? <a href="#">Sign In</a></p>
     </form>
 
@@ -115,7 +115,7 @@ if (isset($_POST['submit1'])) {
     <form class="login-form" action="index.php" method="post">
         <input type="text" placeholder="username" name="username"/>
         <input type="password" placeholder="password" name="password"/>
-        <input type="submit" name="submit" value="login"/>
+        <input type="submit" name="signin" value="login"/>
         <p class="message">Not registered? <a href="#">Create an account</a></p>
     </form>
 

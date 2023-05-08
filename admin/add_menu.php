@@ -27,7 +27,6 @@ if (isset($_POST['submit']))           //if upload btn is pressed
         if ($extension == 'jpg' || $extension == 'png' || $extension == 'gif') {
             if ($fsize >= 1000000) {
 
-
                 $error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 																<strong>Max Image Size is 1024kb!</strong> Try different Image.

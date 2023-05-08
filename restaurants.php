@@ -42,7 +42,7 @@ session_start();
     </div>
     <!-- end:Top links -->
     <!-- start: Inner page hero -->
-    <div class="inner-page-hero bg-image" data-image-src="images/img/res.jpeg">
+    <div class="inner-page-hero bg-image" data-image-src="images/bg.jpg">
         <div class="container"></div>
         <!-- end:Container -->
     </div>
@@ -58,7 +58,6 @@ session_start();
     <section class="restaurants-page">
         <div class="container">
             <div class="row rest__container">
-                <!--                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-3">-->
                 <div class="widget clearfix">
                     <!-- /widget heading -->
                     <div class="widget-heading">
@@ -90,9 +89,6 @@ session_start();
                         </ul>
                     </div>
                 </div>
-                <!-- end:Widget -->
-                <!--                </div>-->
-                <!--                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-9">-->
                 <div class="bg-gray restaurant-entry">
                     <div class="row">
                         <?php $ress = mysqli_query($db, "select getRestFeedbackRating(rs.rs_id) as rating, getRestReviewCount(rs.rs_id) as count, getMinDishPrice(rs.rs_id) as min_price, rs.* from restaurant rs");
@@ -130,8 +126,6 @@ session_start();
                     </div>
                     <!--end:row -->
                 </div>
-
-                <!--                </div>-->
             </div>
         </div>
     </section>

@@ -51,7 +51,7 @@ include_once 'product-action.php'; //including controller
     $rows = mysqli_fetch_array($ress);
 
     ?>
-    <section class="inner-page-hero bg-image" data-image-src="images/img/dish.jpeg">
+    <section class="inner-page-hero bg-image" data-image-src="images/bg.jpg">
         <div class="profile">
             <div class="container">
                 <div class="row">
@@ -89,11 +89,6 @@ include_once 'product-action.php'; //including controller
         </div>
     </section>
     <!-- end:Inner page hero -->
-    <div class="breadcrumb">
-        <div class="container">
-
-        </div>
-    </div>
     <div class="container m-t-30">
         <div class="row">
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">

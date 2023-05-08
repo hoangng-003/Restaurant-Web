@@ -80,13 +80,83 @@ session_start(); //start temp session until logout/browser closed
 </section>
 <!-- banner part ends -->
 
+
+<!-- Popular block starts -->
+<section class="popular">
+    <div class="container">
+        <div class="title text-xs-center m-b-30">
+            <h2 STYLE="text-transform: uppercase;">Popular Dishes of the Month</h2>
+            <p class="lead">The easiest way to your favourite food</p>
+        </div>
+        <div class="row">
+            <?php
+            // fetch records from database to display popular first 3 dishes from table
+            $query_res = mysqli_query($db, "select getDishFeedbackRating(d_id) as rating, getDishReviewCount(d_id) as rvcount, r.rs_id, d.title, d.d_id, d.slogan,
+            d.price, d.img, r.latitude, r.longitude from dishes d join restaurant r on r.rs_id = d.rs_id limit 3;");
+
+            $review_list = '';
+            while ($r = mysqli_fetch_array($query_res)) {
+                $query_reviews = mysqli_query($db, "select df.*, concat_ws(' ',u.f_name,u.l_name) as u_name from dishes_feedbacks df join users u on df.u_id=u.u_id where d_id='$r[d_id]'");
+
+                $review_list = $review_list . "<div class='product-rating'  d_id = '$r[d_id]' style='display: none'>";
+                while ($r_d = mysqli_fetch_array($query_reviews)) {
+                    $review_list = $review_list .
+                        "<div class='product-rating__wrap'>" .
+                        '<div class="product-rating__avatar">
+                            <svg class="avatar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c39.77 0 72 32.24 72 72S295.8 272 256 272c-39.76 0-72-32.24-72-72S216.2 128 256 128zM256 448c-52.93 0-100.9-21.53-135.7-56.29C136.5 349.9 176.5 320 224 320h64c47.54 0 87.54 29.88 103.7 71.71C356.9 426.5 308.9 448 256 448z"/></svg>
+                         </div>' .
+                        "<div class='product-rating__main'>
+                                <div class='product-rating__author-name'>" . $r_d['u_name'] . "</div>
+                                <div class='product-rating__rating_star'>" . rating_star($r_d['rating_value']) . "</div>
+                                <div class='product-rating__feedback'>" . $r_d['feedback'] . "</div>
+                            </div>" .
+                        "</div>"
+                    ;
+                }
+                $review_list = $review_list . "</div>";
+
+                echo '  <div class="col-xs-12 col-sm-6 col-md-4 food-item">
+                            <div class="food-item-wrap">
+                                <div class="figure-wrap bg-image" data-image-src="admin/res_img/dishes/' . $r['img'] . '">
+                                    <div class="distance" latitude = ' . $r['latitude'] . ' longitude = ' . $r['longitude'] . '>
+                                        <i class="fa fa-pin"></i>
+                                    </div>
+                                    <div class="rating pull-left badge badge-light ' . $r['rating'] . '">
+                                       ' . rating_star($r['rating']). '
+                                     </div>
+                                     <div class="review pull-right"><button class="openModal" d_id=' . $r['d_id'] . '>' . $r['rvcount'] . ' reviews</button> </div>
+                                </div>
+                                <div class="content">
+                                    <h5><a href="dishes.php?res_id=' . $r['rs_id'] . '">' . $r['title'] . '</a></h5>
+                                    <div class="product-name">' . $r['slogan'] . '</div>
+                                    <div class="price-btn-block"> <span class="price">$' . $r['price'] . '</span> <a href="dishes.php?res_id=' . $r['rs_id'] . '" class="btn theme-btn-dash pull-right">Order Now</a> </div>
+                                </div>
+                            </div>
+                    </div>';
+            }
+            echo
+                '<div class="modal" id="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <div class="wrapper">
+                                <h3>Review</h3>
+                                <div>' . $review_list . '</div>
+                            </div>
+                        </div>
+                </div>';
+            ?>
+        </div>
+    </div>
+</section>
+<!-- Popular block ends -->
+
 <!-- Featured restaurants starts -->
 <section class="featured-restaurants">
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
                 <div class="title-block pull-left">
-                    <h4>Featured restaurants</h4></div>
+                    <h4>FEATURED RESTAURANTS</h4></div>
             </div>
             <div class="col-sm-8">
                 <!-- restaurants filter nav starts -->
@@ -111,7 +181,6 @@ session_start(); //start temp session until logout/browser closed
         <!-- restaurants listing starts -->
         <div class="row">
             <div class="restaurant-listing">
-
 
                 <?php //fetching records from table and filter using html data-filter tag
                 $ress = mysqli_query($db, "select getRestFeedbackRating(rs.rs_id) as rating, getRestReviewCount(rs.rs_id) as count, getMinDishPrice(rs.rs_id) as min_price, rs.* from restaurant rs");
@@ -152,77 +221,6 @@ session_start(); //start temp session until logout/browser closed
     </div>
 </section>
 <!-- Featured restaurants ends -->
-
-
-<!-- Popular block starts -->
-<section class="popular">
-    <div class="container">
-        <div class="title text-xs-center m-b-30">
-            <h2>Popular Dishes of the Month</h2>
-            <p class="lead">The easiest way to your favourite food</p>
-        </div>
-        <div class="row">
-            <?php
-            // fetch records from database to display popular first 3 dishes from table
-            $query_res = mysqli_query($db, "select getDishFeedbackRating(d_id) as rating, getDishReviewCount(d_id) as rvcount, r.rs_id, d.title, d.d_id, d.slogan,
-            d.price, d.img, r.latitude, r.longitude from dishes d join restaurant r on r.rs_id = d.rs_id limit 9;");
-
-            $review_list = '';
-            while ($r = mysqli_fetch_array($query_res)) {
-                $query_reviews = mysqli_query($db, "select df.*, concat_ws(' ',u.f_name,u.l_name) as u_name from dishes_feedbacks df join users u on df.u_id=u.u_id where d_id='$r[d_id]'");
-
-                $review_list = $review_list . "<div class='product-rating'  d_id = '$r[d_id]' style='display: none'>";
-                while ($r_d = mysqli_fetch_array($query_reviews)) {
-                    $review_list = $review_list .
-                        "<div class='product-rating__wrap'>" .
-                        '<div class="product-rating__avatar">
-                            <svg class="avatar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c39.77 0 72 32.24 72 72S295.8 272 256 272c-39.76 0-72-32.24-72-72S216.2 128 256 128zM256 448c-52.93 0-100.9-21.53-135.7-56.29C136.5 349.9 176.5 320 224 320h64c47.54 0 87.54 29.88 103.7 71.71C356.9 426.5 308.9 448 256 448z"/></svg>
-                         </div>' .
-                        "<div class='product-rating__main'>
-                                <div class='product-rating__author-name'>" . $r_d['u_name'] . "</div>
-                                <div class='product-rating__rating_star'>" . rating_star($r_d['rating_value']) . "</div>
-                                <div class='product-rating__feedback'>" . $r_d['feedback'] . "</div>
-                            </div>" .
-                        "</div>"
-                    ;
-                }
-                $review_list = $review_list . "</div>";
-
-                echo '  <div class="col-xs-12 col-sm-6 col-md-4 food-item">
-                            <div class="food-item-wrap">
-                                <div class="figure-wrap bg-image" data-image-src="admin/res_img/dishes/' . $r['img'] . '">
-                                    <div class="distance" latitude = ' . $r['latitude'] . ' longitude = ' . $r['longitude'] . '>
-                                        <i class="fa fa-pin"></i>
-                                    </div>
-                                    <div class="rating pull-left badge badge-light ' . $r['rating'] . '">
-                                       ' . rating_star($r['rating']). '
-                                     </div>
-                                </div>
-                                <div class="content">
-                                    <div class="review pull-right"><button class="openModal" d_id=' . $r['d_id'] . '>' . $r['rvcount'] . ' reviews</button> </div>
-                                    <h5><a href="dishes.php?res_id=' . $r['rs_id'] . '">' . $r['title'] . '</a></h5>
-                                    <div class="product-name">' . $r['slogan'] . '</div>
-                                    <div class="price-btn-block"> <span class="price">$' . $r['price'] . '</span> <a href="dishes.php?res_id=' . $r['rs_id'] . '" class="btn theme-btn-dash pull-right">Order Now</a> </div>
-                                </div>
-                            </div>
-                    </div>';
-            }
-            echo
-                '<div class="modal" id="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <div class="wrapper">
-                                <h3>Review</h3>
-                                <div>' . $review_list . '</div>
-                            </div>
-                        </div>
-                </div>';
-            ?>
-
-        </div>
-    </div>
-</section>
-<!-- Popular block ends -->
 
 <!-- How it works block starts -->
 <section class="how-it-works">
@@ -278,7 +276,7 @@ session_start(); //start temp session until logout/browser closed
         <!-- 3 block sections ends -->
         <div class="row">
             <div class="col-sm-12 text-center">
-                <p class="pay-info">Pay by Cash on delivery</p>
+                <p class="pay-info"></p>
             </div>
         </div>
     </div>
