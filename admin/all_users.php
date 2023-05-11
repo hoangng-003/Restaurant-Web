@@ -59,7 +59,6 @@ session_start();
             <div class="row">
                 <div class="col-12">
 
-
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">All Registered users</h4>
@@ -103,9 +102,7 @@ session_start();
                                         }
                                     }
 
-
                                     ?>
-
 
                                     </tbody>
                                 </table>

@@ -24,11 +24,10 @@
 							  <li class="nav-item"><a href="registration.php" class="nav-link active">Signup</a> </li>';
                     } else {
                         //if user is login
-
                         echo '<li class="nav-item"><a href="your_orders.php" class="nav-link active">Orders</a> </li>';
+                        echo '<li class="nav-item"><button id="open-profile-modal" class="nav-link active">My profile</button> </li>';
                         echo '<li class="nav-item"><a href="logout.php" class="nav-link active">Logout</a> </li>';
                     }
-
                     ?>
 
                 </ul>

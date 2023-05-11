@@ -49,7 +49,8 @@ if (!empty($_GET["action"])) {
             break;
     }
 }
-function rating_star($rating_value){
+function rating_star($rating_value)
+{
     $rating_star_element = '';
     $count_star = 0;
     for ($i = 0; $i < floor($rating_value); $i++) {

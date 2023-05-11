@@ -1,33 +1,37 @@
-const openModal = document.getElementsByClassName('openModal');
-const modal = document.getElementById('modal');
-const closeModal = document.querySelector('.close');
+$(document).ready(function () {
+    const openReviewModal = document.getElementsByClassName('openModal');
+    const reviewModal = document.getElementById('review-modal');
+    const closeReviewModal = document.querySelector('.review-modal .close');
+    const contentReviewModal = document.querySelector('.review-modal .modal-content');
 
-for (const openModalElement of openModal) {
-    openModalElement.addEventListener('click', function () {
-        modal.style.display = 'flex';
-        for (const element of modal.querySelectorAll('[d_id]')) {
-            if (element.attributes['d_id'].nodeValue == openModalElement.attributes['d_id'].nodeValue) {
-                element.style.display = 'flex';
+    for (const element of openReviewModal) {
+        element.addEventListener('click', function () {
+            reviewModal.querySelector('.title').innerText = "Reviews";
+            reviewModal.style.display = 'flex';
+            for (const element of reviewModal.querySelectorAll('[d_id]')) {
+                if (element.attributes['d_id'].nodeValue == element.attributes['d_id'].nodeValue) {
+                    element.style.display = 'flex';
+                }
             }
-        }
+        });
+    }
+    closeReviewModal.addEventListener('click', function () {
+        setTimeout(function () {
+            reviewModal.style.display = 'none';
+            for (const element of reviewModal.querySelectorAll('[d_id]')) {
+                element.style.display = 'none';
+            }
+            ;
+        }, 10);
     });
-}
-closeModal.addEventListener('click', function () {
-    setTimeout(function () {
-        modal.style.display = 'none';
-        for (const element of modal.querySelectorAll('[d_id]')) {
-            element.style.display = 'none';
-        }
-        ;
-    }, 10);
+
+    contentReviewModal.addEventListener('click', function (e) {
+        e.stopPropagation();
+    });
+
+    reviewModal.addEventListener('click', function (e) {
+        reviewModal.style.display = 'none';
+    });
 });
 
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = 'none';
-        for (const element of modal.querySelectorAll('[d_id]')) {
-            element.style.display = 'none';
-        }
-    }
-};
 

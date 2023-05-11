@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
 include("connection/connect.php");
-include_once 'product-action.php';
+include_once 'product_action.php';
 error_reporting(0);
 session_start();
 if (empty($_SESSION["user_id"]))
@@ -41,9 +41,9 @@ if ($_POST['submit']) {
     <link rel="icon" href="#">
     <title>Checkout</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="css/lib/animate.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -155,12 +155,12 @@ include_once("./footer.php");
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
-<script src="js/jquery.min.js"></script>
-<script src="js/tether.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap-slider.min.js"></script>
-<script src="js/jquery.isotope.min.js"></script>
-<script src="js/headroom.js"></script>
+<script src="js/lib/jquery.min.js"></script>
+<script src="js/lib/tether.min.js"></script>
+<script src="js/lib/bootstrap.min.js"></script>
+<script src="js/lib/bootstrap-slider.min.js"></script>
+<script src="js/lib/jquery.isotope.min.js"></script>
+<script src="js/lib/headroom.js"></script>
 <script src="js/thegreen.min.js"></script>
 </body>
 

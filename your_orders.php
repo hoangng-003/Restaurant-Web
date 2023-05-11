@@ -27,13 +27,14 @@ if (isset($_POST['submit'])) {
     <link rel="icon" href="#">
     <title>Orders</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/lib/bootstrap.min.css" rel="stylesheet">
 
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="css/lib/animate.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/feedback-style.css">
+    <link rel="stylesheet" href="css/feedback.css">
+    <link rel="stylesheet" href="css/profile.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style type="text/css" rel="stylesheet">
 
@@ -339,7 +340,7 @@ include_once("./footer.php");
 ?>
 
 <!-- end:Footer -->
-<div class="modal" id="modal">
+<div class="feedback-modal" id="feedback-modal">
     <div class="modal-content">
         <div class="wrapper">
             <h3>How do you feel?</h3>
@@ -365,19 +366,32 @@ include_once("./footer.php");
     </div>
 </div>
 
+<div class="profile-modal" id="profile-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="wrapper">
+            <h3 class="title">Profile</h3>
+            <div class="profile">
+                ABC 123
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
-<script src="js/jquery.min.js"></script>
-<script src="js/tether.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap-slider.min.js"></script>
-<script src="js/jquery.isotope.min.js"></script>
-<script src="js/headroom.js"></script>
+<script src="js/lib/jquery.min.js"></script>
+<script src="js/lib/tether.min.js"></script>
+<script src="js/lib/bootstrap.min.js"></script>
+<script src="js/lib/bootstrap-slider.min.js"></script>
+<script src="js/lib/jquery.isotope.min.js"></script>
+<script src="js/lib/headroom.js"></script>
 <script src="js/thegreen.min.js"></script>
-<script src="js/widget_body.js"></script>
+<script src="js/widget-body.js"></script>
 <script src="js/feedback.js"></script>
+<script src="js/profile.js"></script>
 </body>
 
 </html>

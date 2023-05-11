@@ -39,7 +39,6 @@ if (isset($_POST['submit'])) {
 															</div>';
         } else {
 
-
             $mql = "update users set username='$_POST[uname]', f_name='$_POST[fname]', l_name='$_POST[lname]',email='$_POST[email]',phone='$_POST[phone]',password='" . md5($_POST[password]) . "' where u_id='$_GET[user_upd]' ";
             mysqli_query($db, $mql);
             $success = '<div class="alert alert-success alert-dismissible fade show">
@@ -104,19 +103,13 @@ if (isset($_POST['submit'])) {
             <!-- Start Page Content -->
             <div class="row">
 
-
                 <div class="container-fluid">
                     <!-- Start Page Content -->
-
 
                     <?php
                     echo $error;
                     echo $success;
-
-                    echo var_dump($_POST);
-
                     ?>
-
 
                     <div class="col-lg-12">
                         <div class="card card-outline-primary">

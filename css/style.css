@@ -67,7 +67,7 @@ body {
 
 
 /* ==========================
-*   Typohraphy
+*   Typography
 ============================*/
 
 .h1,
@@ -154,7 +154,7 @@ hr {
 
 
 /*==================================
-* Foms
+* Forms
 *===================================*/
 
 .custom-control-input:checked~.custom-control-indicator {
@@ -445,6 +445,15 @@ div#mainNavbarCollapse {
 .navbar-nav .nav-item {
     padding-left: 10px;
 }
+
+.navbar-nav .nav-item button{
+    background: none;
+    border:none;
+    cursor: pointer;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 
 .navbar-dark .navbar-toggler {
     background-image: none;
@@ -1852,9 +1861,7 @@ a.more-link {
 
 .menu-widget,
 .widget {
-    border: 1px solid #eaebeb;
     background: #fafaf8;
-    border-radius: 2px;
     position: relative;
 
     /*new*/
@@ -1961,7 +1968,7 @@ a.more-link {
 }
 
 .menu-widget .food-item .item-cart-info {
-    padding-top: 0px;
+    padding-top: 0;
     display: flex;
     flex-direction: column;
 }
@@ -2038,10 +2045,7 @@ a[aria-expanded=false] .fa-angle-down {
 ==============================*/
 
 .restaurant-entry {
-    border: 1px solid #eaebeb;
-    border-radius: 2px;
     margin-bottom: 20px;
-
     border-radius: 10px;
     border: 3px #eee solid;
 }
@@ -2346,7 +2350,6 @@ a[aria-expanded=false] .fa-angle-down {
 
 .wwone__map-infobox__badge {
     position: absolute;
-    display: block;
     line-height: 25px;
     color: #fff;
     text-align: center;

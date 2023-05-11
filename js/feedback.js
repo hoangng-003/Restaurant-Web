@@ -1,11 +1,12 @@
 $(document).ready(function () {
-    const openModal = document.getElementsByClassName('show-feedback');
-    const modal = document.getElementById('modal');
-    const closeModal = document.querySelector('.btn-group .btn.cancel');
+    const openFeedbackModal = document.getElementsByClassName('show-feedback');
+    const feedbackModal = document.getElementById('feedback-modal');
+    const closeFeedbackModal = document.querySelector('.feedback-modal .btn-group .btn.cancel');
+    const contentFeedbackModal = document.querySelector('.feedback-modal .modal-content');
 
-    const allStar = document.querySelectorAll('.rating .star');
-    const ratingValue = document.querySelector('.rating input');
-    const d_idElement = document.querySelector('.modal .d_id input');
+    const allStar = document.querySelectorAll('.feedback-modal .rating .star');
+    const ratingValue = document.querySelector('.feedback-modal .rating input');
+    const d_idElement = document.querySelector('.feedback-modal .d_id input');
 
     $('.show-feedback').click(function () {
         let d_id = this.attributes['d_id'].nodeValue;
@@ -33,30 +34,30 @@ $(document).ready(function () {
         })
     })
 
-    for (const openModalElement of openModal) {
-        openModalElement.addEventListener('click', function () {
-            modal.style.display = 'flex';
+    for (const element of openFeedbackModal) {
+        element.addEventListener('click', function () {
+            feedbackModal.style.display = 'flex';
             setTimeout(function () {
-                modal.classList.add('show');
+                feedbackModal.classList.add('show');
                 // let d_id = openModalElement.attributes['d_id'].value.toString();
                 // modal.querySelector('.modal-content p').innerText="Đây là món có u_id= "+ d_id;
             }, 10);
         });
     }
 
-    closeModal.addEventListener('click', function () {
-        modal.classList.remove('show');
-        modal.style.display = 'none';
+    closeFeedbackModal.addEventListener('click', function () {
+        feedbackModal.classList.remove('show');
+        feedbackModal.style.display = 'none';
     });
 
+    contentFeedbackModal.addEventListener('click', function (e){
+        e.stopPropagation();
+    });
 
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.classList.remove("show");
-            modal.style.display = 'none';
-        }
-    };
-
+    feedbackModal.addEventListener('click', function (){
+        feedbackModal.classList.remove("show");
+        feedbackModal.style.display = 'none';
+    })
 });
 
 function validateFormFeedBack() {
