@@ -264,10 +264,6 @@ include_once 'product_action.php'; //including controller
         <!-- end:row -->
     </div>
     <!-- end:Container -->
-
-    <!-- start: FOOTER -->
-    <?php include_once ("footer.php")?>
-    <!-- end:Footer -->
 </div>
 <!-- end:page wrapper -->
 </div>

@@ -26,8 +26,8 @@
 
         if (!empty($_POST["submit"]))   // if records were not empty
         {
-            $loginquery = "SELECT * FROM users WHERE username='$username' && password='" . md5($password) . "'"; //selecting matching records
-            $result = mysqli_query($db, $loginquery); //executing
+            $login_query = "SELECT * FROM users WHERE username='$username' && password='" . md5($password) . "'"; //selecting matching records
+            $result = mysqli_query($db, $login_query); //executing
             $row = mysqli_fetch_array($result);
             if (is_array($row))  // if matching records in the array & if everything is right
             {
@@ -70,7 +70,6 @@
                 account</a></div>
     </div>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
 
 </body>
 

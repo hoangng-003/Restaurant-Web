@@ -25,12 +25,13 @@ include_once 'product_action.php'; //including controller
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/review.css">
+    <link rel="stylesheet" href="css/profile.css">
 </head>
 
 <body>
 
 <!--header starts-->
-<?php include_once ("./header.php")?>
+<?php include_once("./header.php") ?>
 <div class="page-wrapper">
     <!-- top Links -->
     <div class="top-links">
@@ -152,8 +153,6 @@ include_once 'product_action.php'; //including controller
                                class="btn theme-btn btn-lg">Checkout</a>
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
@@ -194,8 +193,7 @@ include_once 'product_action.php'; //including controller
                                 <div class='product-rating__rating_star'>" . rating_star($r_d['rating_value']) . "</div>
                                 <div class='product-rating__feedback'>" . $r_d['feedback'] . "</div>
                             </div>" .
-                                        "</div>"
-                                    ;
+                                        "</div>";
                                 }
                                 $review_list = $review_list . "</div>";
 
@@ -213,7 +211,10 @@ include_once 'product_action.php'; //including controller
                                                 <div class="rest-descr">
                                                     <h6><a href="#"><?php echo $product['title']; ?></a></h6>
                                                     <p> <?php echo $product['slogan']; ?></p>
-                                                    <button type="button" class="openModal" d_id='<?php echo $product['d_id']; ?>'> <?php echo $product['count']; ?> Reviews</button>
+                                                    <button type="button" class="openModal"
+                                                            d_id='<?php echo $product['d_id']; ?>'> <?php echo $product['count']; ?>
+                                                        Reviews
+                                                    </button>
                                                 </div>
                                                 <!-- end:Description -->
                                         </div>
@@ -236,20 +237,18 @@ include_once 'product_action.php'; //including controller
                                 <!-- end:Food item -->
                                 <?php
                             }
-
                         }
                         echo
-                            '<div class="modal" id="modal">
+                            '<div class="review-modal" id="review-modal">
                                 <div class="modal-content">
-                                    <span class="close">&times;</span>
-                                    <div class="wrapper">
-                                        <h3>Review</h3>
-                                        <div>' . $review_list . '</div>
-                                    </div>
+                                <span class="close">&times;</span>
+                                <div class="wrapper">
+                                    <h3 class="title">Review</h3>
+                                    <div>' . $review_list . '</div>
+                                </div>
                                 </div>
                             </div>';
                         ?>
-
 
                     </div>
                     <!-- end:Collapse -->
@@ -312,175 +311,15 @@ include_once 'product_action.php'; //including controller
     <!-- end:Container -->
     <!-- start: FOOTER -->
     <?php
-    include_once ("./footer.php");
+    include_once("./footer.php");
     ?>
     <!-- end:Footer -->
 </div>
 <!-- end:page wrapper -->
 </div>
 <!--/end:Site wrapper -->
-<!-- Modal -->
-<div class="modal fade" id="order-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            <div class="modal-body cart-addon">
-                <div class="food-item white">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-lg-6">
-                            <div class="item-img pull-left">
-                                <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/70x70"
-                                                                                   alt="Food logo"></a>
-                            </div>
-                            <!-- end:Logo -->
-                            <div class="rest-descr">
-                                <h6><a href="#">Sandwich de Alegranza Grande Menü (28 - 30 cm.)</a></h6></div>
-                            <!-- end:Description -->
-                        </div>
-                        <!-- end:col -->
-                        <div class="col-xs-6 col-sm-2 col-lg-2 text-xs-center"><span
-                                    class="price pull-left">$ 2.99</span></div>
-                        <div class="col-xs-6 col-sm-4 col-lg-4">
-                            <div class="row no-gutter">
-                                <div class="col-xs-7">
-                                    <select class="form-control b-r-0" id="exampleSelect2">
-                                        <option>Size SM</option>
-                                        <option>Size LG</option>
-                                        <option>Size XL</option>
-                                    </select>
-                                </div>
-                                <div class="col-xs-5">
-                                    <input class="form-control" type="number" value="0" id="quant-input-2"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end:row -->
-                </div>
-                <!-- end:Food item -->
-                <div class="food-item">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-lg-6">
-                            <div class="item-img pull-left">
-                                <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/70x70"
-                                                                                   alt="Food logo"></a>
-                            </div>
-                            <!-- end:Logo -->
-                            <div class="rest-descr">
-                                <h6><a href="#">Sandwich de Alegranza Grande Menü (28 - 30 cm.)</a></h6></div>
-                            <!-- end:Description -->
-                        </div>
-                        <!-- end:col -->
-                        <div class="col-xs-6 col-sm-2 col-lg-2 text-xs-center"><span
-                                    class="price pull-left">$ 2.49</span></div>
-                        <div class="col-xs-6 col-sm-4 col-lg-4">
-                            <div class="row no-gutter">
-                                <div class="col-xs-7">
-                                    <select class="form-control b-r-0" id="exampleSelect3">
-                                        <option>Size SM</option>
-                                        <option>Size LG</option>
-                                        <option>Size XL</option>
-                                    </select>
-                                </div>
-                                <div class="col-xs-5">
-                                    <input class="form-control" type="number" value="0" id="quant-input-3"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end:row -->
-                </div>
-                <!-- end:Food item -->
-                <div class="food-item">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-lg-6">
-                            <div class="item-img pull-left">
-                                <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/70x70"
-                                                                                   alt="Food logo"></a>
-                            </div>
-                            <!-- end:Logo -->
-                            <div class="rest-descr">
-                                <h6><a href="#">Sandwich de Alegranza Grande Menü (28 - 30 cm.)</a></h6></div>
-                            <!-- end:Description -->
-                        </div>
-                        <!-- end:col -->
-                        <div class="col-xs-6 col-sm-2 col-lg-2 text-xs-center"><span
-                                    class="price pull-left">$ 1.99</span></div>
-                        <div class="col-xs-6 col-sm-4 col-lg-4">
-                            <div class="row no-gutter">
-                                <div class="col-xs-7">
-                                    <select class="form-control b-r-0" id="exampleSelect5">
-                                        <option>Size SM</option>
-                                        <option>Size LG</option>
-                                        <option>Size XL</option>
-                                    </select>
-                                </div>
-                                <div class="col-xs-5">
-                                    <input class="form-control" type="number" value="0" id="quant-input-4"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end:row -->
-                </div>
-                <!-- end:Food item -->
-                <div class="food-item">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-lg-6">
-                            <div class="item-img pull-left">
-                                <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/70x70"
-                                                                                   alt="Food logo"></a>
-                            </div>
-                            <!-- end:Logo -->
-                            <div class="rest-descr">
-                                <h6><a href="#">Sandwich de Alegranza Grande Menü (28 - 30 cm.)</a></h6></div>
-                            <!-- end:Description -->
-                        </div>
-                        <!-- end:col -->
-                        <div class="col-xs-6 col-sm-2 col-lg-2 text-xs-center"><span
-                                    class="price pull-left">$ 3.15</span></div>
-                        <div class="col-xs-6 col-sm-4 col-lg-4">
-                            <div class="row no-gutter">
-                                <div class="col-xs-7">
-                                    <select class="form-control b-r-0" id="exampleSelect6">
-                                        <option>Size SM</option>
-                                        <option>Size LG</option>
-                                        <option>Size XL</option>
-                                    </select>
-                                </div>
-                                <div class="col-xs-5">
-                                    <input class="form-control" type="number" value="0" id="quant-input-5"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end:row -->
-                </div>
-                <!-- end:Food item -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn theme-btn">Add to cart</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    // function increaseCount(a, b) {
-    //     var input = b.previousElementSibling;
-    //     var value = parseInt(input.value, 10);
-    //     value = isNaN(value) ? 0 : value;
-    //     value++;
-    //     input.value = value;
-    // }
-    //
-    // function decreaseCount(a, b) {
-    //     var input = b.nextElementSibling;
-    //     var value = parseInt(input.value, 10);
-    //     if (value > 1) {
-    //         value = isNaN(value) ? 0 : value;
-    //         value--;
-    //         input.value = value;
-    //     }
-    // }
-</script>
+<?php include_once("profile_modal.php") ?>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <script src="js/lib/jquery.min.js"></script>
@@ -490,6 +329,7 @@ include_once 'product_action.php'; //including controller
 <script src="js/lib/jquery.isotope.min.js"></script>
 <script src="js/lib/headroom.js"></script>
 <script src="js/thegreen.min.js"></script>
+<script src="js/profile.js"></script>
 <script src="js/review.js"></script>
 </body>
 

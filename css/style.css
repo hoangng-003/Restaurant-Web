@@ -196,7 +196,7 @@ hr {
 }
 
 .custom-control-input:disabled~.custom-control-description {
-    color: #76767;
+    color: black;
 }
 
 .custom-control {
@@ -337,19 +337,19 @@ hr {
 }
 
 .b-l {
-    border-left: 1px solid #edeed
+    border-left: 1px solid black;
 }
 
 .b-r {
-    border-left: 1px solid #edeed
+    border-right: 1px solid black;
 }
 
 .b-t {
-    border-top: 1px solid #edeed
+    border-top: 1px solid black;
 }
 
 .b-b {
-    border-bottom: 1px solid #edeed
+    border-bottom: 1px solid black;
 }
 
 .b-b-0 {
@@ -1274,7 +1274,7 @@ Steps
     float: left;
     width: 100%;
 }
-}
+
 
 .featured-restaurants .restaurant-logo {
     border-radius: 3px;

@@ -22,6 +22,7 @@ session_start();
     <link href="css/lib/animate.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/review.css">
 </head>
 
@@ -138,6 +139,7 @@ session_start();
     <!-- end:Footer -->
     </div>
 
+    <?php include_once("profile_modal.php") ?>
 
     <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -148,6 +150,7 @@ session_start();
     <script src="js/lib/jquery.isotope.min.js"></script>
     <script src="js/lib/headroom.js"></script>
     <script src="js/thegreen.min.js"></script>
+    <script src="js/profile.js"></script>
     <script src="js/widget-body.js"></script>
 </body>
 

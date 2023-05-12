@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) //if submit btn is pressed
                                                             }
                                                             setInterval(function(){countdown();},1000);
 														</script>'";
-            header("refresh:5;url=login.php"); // redireted once inserted success
+            header("refresh:0;url=login.php"); //
         }
     }
 

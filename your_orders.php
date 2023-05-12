@@ -366,17 +366,7 @@ include_once("./footer.php");
     </div>
 </div>
 
-<div class="profile-modal" id="profile-modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="wrapper">
-            <h3 class="title">Profile</h3>
-            <div class="profile">
-                ABC 123
-            </div>
-        </div>
-    </div>
-</div>
+<?php include_once("profile_modal.php") ?>
 
 </div>
 

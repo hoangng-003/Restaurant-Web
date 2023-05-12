@@ -6,11 +6,10 @@ $(document).ready(function () {
 
     for (const element of openReviewModal) {
         element.addEventListener('click', function () {
-            reviewModal.querySelector('.title').innerText = "Reviews";
             reviewModal.style.display = 'flex';
-            for (const element of reviewModal.querySelectorAll('[d_id]')) {
-                if (element.attributes['d_id'].nodeValue == element.attributes['d_id'].nodeValue) {
-                    element.style.display = 'flex';
+            for (const reviewElement of reviewModal.querySelectorAll('[d_id]')) {
+                if (reviewElement.attributes['d_id'].nodeValue == element.attributes['d_id'].nodeValue) {
+                    reviewElement.style.display = 'flex';
                 }
             }
         });
@@ -31,6 +30,9 @@ $(document).ready(function () {
 
     reviewModal.addEventListener('click', function (e) {
         reviewModal.style.display = 'none';
+        for (const element of reviewModal.querySelectorAll('[d_id]')) {
+            element.style.display = 'none';
+        }
     });
 });
 
