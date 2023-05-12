@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
             $sql = "update users set f_name='$_POST[first_name]', l_name='$_POST[last_name]',email='$_POST[email]',phone='$_POST[phone]',address ='$_POST[address]' where u_id='$_SESSION[user_id]' ";
             mysqli_query($db, $sql);
             $success = '<div class="alert alert-success col-lg-8" style="position: relative; left: 50%; transform: translateX(-50%); margin-top: 1rem">
-                          <strong>Success!</strong> All changes has saved!</div>';
+                          <strong>Success!</strong> Your changes has been saved!</div>';
         }
     }
 }
