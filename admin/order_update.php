@@ -22,8 +22,6 @@ if (strlen($_SESSION['user_id']) == 0) {
             window.close();
         }
 
-        ser
-
         function f3() {
             window.print();
         }
@@ -126,7 +124,6 @@ if (strlen($_SESSION['user_id']) == 0) {
 
     <div>
         <form name="updateticket" id="updatecomplaint" method="post">
-
             <table>
                 <tr>
                     <td><b>form Number</b></td>
@@ -148,7 +145,6 @@ if (strlen($_SESSION['user_id']) == 0) {
 
                         </select></td>
                 </tr>
-
 
                 <tr>
                     <td><b>Remark</b></td>

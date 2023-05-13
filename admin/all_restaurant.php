@@ -105,14 +105,12 @@ session_start();
                                     </tr>
                                     </tfoot>
                                     <tbody>
-
-
                                     <?php
                                     $sql = "SELECT * FROM restaurant order by rs_id desc";
                                     $query = mysqli_query($db, $sql);
 
                                     if (!mysqli_num_rows($query) > 0) {
-                                        echo '<td colspan="11"><center>No Srores-Data!</center></td>';
+                                        echo '<td colspan="11"><center>No Stores-Data!</center></td>';
                                     } else {
                                         while ($rows = mysqli_fetch_array($query)) {
 
@@ -121,35 +119,32 @@ session_start();
                                             $row = mysqli_fetch_array($res);
 
                                             echo ' <tr><td>' . $row['c_name'] . '</td>
-																								<td>' . $rows['title'] . '</td>
-																								<td>' . $rows['email'] . '</td>
-																								<td>' . $rows['phone'] . '</td>
-																								<td>' . $rows['url'] . '</td>
-																								
-																								
-																								<td>' . $rows['o_hr'] . '</td>
-																								<td>' . $rows['c_hr'] . '</td>
-																								<td>' . $rows['o_days'] . '</td>
-																								
-																								<td>' . $rows['address'] . '</td>
-																								
-																								<td><div class="col-md-3 col-lg-8 m-b-10">
-																								<center><img src="Res_img/' . $rows['image'] . '" class="img-responsive radius"  style="min-width:150px;min-height:100px;"/></center>
-																								</div></td>
-																								<td>' . $rows['latitude'] . '</td>
-																								<td>' . $rows['longitude'] . '</td>
-																								<td>' . $rows['date'] . '</td>
-																									 <td><a href="delete_stores.php?res_del=' . $rows['rs_id'] . '" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
-																									 <a href="update_restaurant.php?res_upd=' . $rows['rs_id'] . '" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="ti-settings"></i></a>
-																									</td></tr>';
-
+                                                    <td>' . $rows['title'] . '</td>
+                                                    <td>' . $rows['email'] . '</td>
+                                                    <td>' . $rows['phone'] . '</td>
+                                                    <td>' . $rows['url'] . '</td>
+                                                    
+                                                    <td>' . $rows['o_hr'] . '</td>
+                                                    <td>' . $rows['c_hr'] . '</td>
+                                                    <td>' . $rows['o_days'] . '</td>
+                                                    
+                                                    <td>' . $rows['address'] . '</td>
+                                                    
+                                                    <td><div class="col-md-3 col-lg-8 m-b-10">
+                                                    <center><img src="Res_img/' . $rows['image'] . '" class="img-responsive radius"  style="min-width:150px;min-height:100px;"/></center>
+                                                    </div></td>
+                                                    <td>' . $rows['latitude'] . '</td>
+                                                    <td>' . $rows['longitude'] . '</td>
+                                                    <td>' . $rows['date'] . '</td>
+                                                         <td><a href="delete_stores.php?res_del=' . $rows['rs_id'] . '" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
+                                                         <a href="update_restaurant.php?res_upd=' . $rows['rs_id'] . '" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="ti-settings"></i></a>
+                                                        </td></tr>';
 
                                         }
                                     }
 
 
                                     ?>
-
 
                                     </tbody>
                                 </table>

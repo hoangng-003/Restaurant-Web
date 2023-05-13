@@ -21,6 +21,7 @@ include_once 'product_action.php'; //including controller
     <link href="css/lib/animate.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/review.css">
 </head>
 
@@ -226,36 +227,14 @@ include_once 'product_action.php'; //including controller
                         </div>
                         <div class="widget-body">
                             <ul class="tags">
-                                <li><a href="#" class="tag">
-                                        Coupons
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Discounts
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Deals
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Amazon
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Ebay
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Fashion
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Shoes
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Kids
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Travel
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Hosting
-                                    </a></li>
+                                <?php
+                                $query = mysqli_query($db, "select * from res_category limit 9");
+                                while ($rows = mysqli_fetch_array($query)){
+                                    echo "<li><a href=\"#\" class=\"tag\">
+                                    $rows[c_name]
+                                </a></li>";
+                                }
+                                ?>
                             </ul>
                         </div>
                     </div>
@@ -270,9 +249,9 @@ include_once 'product_action.php'; //including controller
 <!-- end:page wrapper -->
 </div>
 
+<?php include_once("./profile_modal.php") ?>
 <!-- start: FOOTER -->
 <?php include_once("./footer.php"); ?>
-<?php include_once("profile_modal.php") ?>
 <!-- end:Footer -->
 
 <!-- Bootstrap core JavaScript
@@ -285,6 +264,7 @@ include_once 'product_action.php'; //including controller
 <script src="js/lib/headroom.js"></script>
 <script src="js/thegreen.js"></script>
 <script src="js/review.js"></script>
+<script src="js/profile.js"></script>
 <script src="js/widget-body.js"></script>
 </body>
 

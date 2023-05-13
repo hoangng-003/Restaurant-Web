@@ -136,7 +136,7 @@ if (isset($_POST['submit'])) {
                                             <!--/span-->
                                             <div class="col-md-6">
                                                 <div class="form-group has-danger">
-                                                    <label class="control-label">First-Name</label>
+                                                    <label class="control-label">Firstname</label>
                                                     <input type="text" name="fname"
                                                            class="form-control form-control-danger"
                                                            value="<?php echo $newrow['f_name']; ?>" placeholder="jon">
@@ -148,7 +148,7 @@ if (isset($_POST['submit'])) {
                                         <div class="row p-t-20">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">Last-Name </label>
+                                                    <label class="control-label">Lastname </label>
                                                     <input type="text" name="lname" class="form-control"
                                                            placeholder="doe" value="<?php echo $newrow['l_name']; ?>">
                                                 </div>

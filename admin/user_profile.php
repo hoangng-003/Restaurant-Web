@@ -13,7 +13,7 @@ if (strlen($_SESSION['user_id']) == 0) {
         $query = mysqli_query($db, "insert into remark(frm_id,status,remark) values('$form_id','$status','$remark')");
         $sql = mysqli_query($db, "update users_orders set status='$status' where o_id='$form_id'");
 
-        echo "<script>alert('form details updated successfully');</script>";
+        echo "<script>alert('Form details updated successfully');</script>";
 
     }
 
@@ -22,8 +22,6 @@ if (strlen($_SESSION['user_id']) == 0) {
         function f2() {
             window.close();
         }
-
-        ser
 
         function f3() {
             window.print();
@@ -53,7 +51,6 @@ if (strlen($_SESSION['user_id']) == 0) {
         <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <style type="text/css" rel="stylesheet">
-
 
             .indent-small {
                 margin-left: 5px;
@@ -159,7 +156,6 @@ if (strlen($_SESSION['user_id']) == 0) {
                         <td><b>lastname:</b></td>
                         <td><?php echo htmlentities($row['l_name']); ?></td>
                     </tr>
-
 
                     <tr height="50">
                         <td><b>User Email:</b></td>

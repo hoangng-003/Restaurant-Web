@@ -266,36 +266,14 @@ include_once 'product_action.php'; //including controller
                         </div>
                         <div class="widget-body">
                             <ul class="tags">
-                                <li><a href="#" class="tag">
-                                        Coupons
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Discounts
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Deals
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Amazon
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Ebay
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Fashion
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Shoes
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Kids
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Travel
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Hosting
-                                    </a></li>
+                                <?php
+                                $query = mysqli_query($db, "select * from res_category limit 9");
+                                while ($rows = mysqli_fetch_array($query)){
+                                    echo "<li><a href=\"#\" class=\"tag\">
+                                    $rows[c_name]
+                                </a></li>";
+                                }
+                                ?>
                             </ul>
                         </div>
                     </div>

@@ -26,19 +26,15 @@ $(function() {
                 $("body").addClass("mini-sidebar"), $(".navbar-brand span").hide());
         }),
 
-
-
         $(".fix-header .header").stick_in_parent({}), $(".nav-toggler").click(function() {
             $("body").toggleClass("show-sidebar"), $(".nav-toggler i").toggleClass("mdi mdi-menu"),
                 $(".nav-toggler i").addClass("mdi mdi-close");
         }),
 
 
-
         $(".search-box a, .search-box .app-search .srh-btn").on("click", function() {
             $(".app-search").slideToggle(200);
         }),
-
 
 
         $(".floating-labels .form-control").on("focus blur", function(i) {

@@ -27,16 +27,14 @@
             <div class="col-xs-12 col-sm-3 popular-locations color-gray">
                 <h5>Popular locations</h5>
                 <ul>
-                    <li><a href="#">Sarajevo</a></li>
-                    <li><a href="#">Split</a></li>
-                    <li><a href="#">Tuzla</a></li>
-                    <li><a href="#">Sibenik</a></li>
-                    <li><a href="#">Zagreb</a></li>
-                    <li><a href="#">Brcko</a></li>
-                    <li><a href="#">Beograd</a></li>
-                    <li><a href="#">New York</a></li>
-                    <li><a href="#">Gradacac</a></li>
-                    <li><a href="#">Los Angeles</a></li>
+                    <li><a href="#">Cau Giay</a></li>
+                    <li><a href="#">Dich Vong Hau</a></li>
+                    <li><a href="#">Ba Dinh</a></li>
+                    <li><a href="#">Ho Tay</a></li>
+                    <li><a href="#">Cau Giay</a></li>
+                    <li><a href="#">Dich Vong Hau</a></li>
+                    <li><a href="#">Ba Dinh</a></li>
+                    <li><a href="#">Ho Tay</a></li>
                 </ul>
             </div>
         </div>
@@ -66,11 +64,12 @@
                 </div>
                 <div class="col-xs-12 col-sm-4 address color-gray">
                     <h5>Address</h5>
-                    <p>Concept design of oline food order and deliveye,planned as restaurant directory</p>
+                    <p>Ha Noi, Viet Nam</p>
                     <h5>Phone: <a href="tel:+814508451">0914 508 451</a></h5></div>
                 <div class="col-xs-12 col-sm-5 additional-info color-gray">
-                    <h5>Addition informations</h5>
-                    <p>Join the thousands of other restaurants who benefit from having their menus on TakeOff</p>
+                    <h5>Addition information's</h5>
+                    <p>Introducing our chain of vegetarian stores, where you can find a wide selection of delicious and
+                        nutritious meat-free options to satisfy your taste buds.</p>
                 </div>
             </div>
         </div>
