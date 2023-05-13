@@ -298,12 +298,12 @@ if (isset($_POST['submit'])) {
                                             <td data-column="Action">
                                                 <a
                                                     <?php
-                                                    if ($status != "in process") {
+                                                    if ($status != "in process" && $status!= "paid") {
                                                         echo "href='delete_orders.php?order_del=$row[o_id]'";
                                                         echo "onclick=\"return confirm('Are you sure you want to cancel your order?');\"";
                                                     }
                                                     ?>
-                                                        class="btn btn-danger btn-flat btn-addon btn-xs m-b-10 <?php if ($status == "in process") echo "forbidden-remove"; ?>">
+                                                        class="btn btn-danger btn-flat btn-addon btn-xs m-b-10 <?php if ($status == "in process" || $status == "paid") echo "forbidden-remove"; ?>">
                                                     <i class="fa fa-trash-o" style="font-size:16px"></i>
                                                 </a>
                                             </td>
