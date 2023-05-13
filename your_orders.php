@@ -213,24 +213,14 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="widget-body">
                             <ul class="tags">
-                                <li><a href="#" class="tag">
-                                        Pizza
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Sandwich
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Com tam
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Fish
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Desert
-                                    </a></li>
-                                <li><a href="#" class="tag">
-                                        Salad
-                                    </a></li>
+                                <?php
+                                $query = mysqli_query($db, "select * from res_category limit 9");
+                                while ($rows = mysqli_fetch_array($query)){
+                                    echo "<li><a href=\"#\" class=\"tag\">
+                                    $rows[c_name]
+                                </a></li>";
+                                }
+                                ?>
                             </ul>
                         </div>
                     </div>
@@ -290,8 +280,15 @@ if (isset($_POST['submit'])) {
                                                 if ($status == "rejected") {
                                                     ?>
                                                     <button type="button" class="btn btn-danger"><i
-                                                                class="fa fa-close"></i>cancelled
+                                                                class="fa fa-close"></i>Cancelled
                                                     </button>
+                                                    <?php
+                                                }
+                                                ?>
+                                                <?php
+                                                if ($status == "paid") {
+                                                    ?>
+                                                    <span class="badge badge-pill badge-info">Paid & Dispatch</span>
                                                     <?php
                                                 }
                                                 ?>

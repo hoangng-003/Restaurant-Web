@@ -157,8 +157,7 @@ session_start();
                                             <td>
                                                 <div style="text-align: center;">
                                                     <button type="button" class="btn btn-info"
-                                                            style="font-weight:bold;"><span class="fa fa-bars"
-                                                                                            aria-hidden="true">Dispatch
+                                                            style="width: 100px;">Dispatch
                                                     </button>
                                                 </div>
                                             </td>
@@ -167,8 +166,7 @@ session_start();
                                         if ($status == "in process") { ?>
                                             <td>
                                                 <div style="text-align: center;">
-                                                    <button type="button" class="btn btn-warning"><span
-                                                                class="fa fa-cog fa-spin" aria-hidden="true"></span>On a
+                                                    <button type="button" class="btn btn-warning">On a
                                                         Way!
                                                     </button>
                                                 </div>
@@ -179,8 +177,7 @@ session_start();
                                             ?>
                                             <td>
                                                 <div style="text-align: center;">
-                                                    <button type="button" class="btn btn-success"><span
-                                                                class="fa fa-check-circle" aria-hidden="true">Delivered
+                                                    <button type="button" class="btn btn-success">Delivered
                                                     </button>
                                                 </div>
                                             </td>
@@ -192,8 +189,19 @@ session_start();
                                             ?>
                                             <td>
                                                 <div style="text-align: center;">
-                                                    <button type="button" class="btn btn-danger"><i
-                                                                class="fa fa-close"></i>cancelled
+                                                    <button type="button" class="btn btn-danger"></i>cancelled
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <?php
+                                        }
+                                        ?>
+                                        <?php
+                                        if ($status == "paid") {
+                                            ?>
+                                            <td>
+                                                <div style="text-align: center;">
+                                                    <button type="button" class="btn btn-info" style="width: 100px">Paid
                                                     </button>
                                                 </div>
                                             </td>

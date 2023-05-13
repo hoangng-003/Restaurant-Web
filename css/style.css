@@ -2803,6 +2803,10 @@ a[aria-expanded=false] .fa-angle-down {
      backdrop-filter: blur(2em);
     -webkit-backdrop-filter: blur(2em);
 }
+.badge-info {
+    color: #fff;
+    background-color: #17a2b8;
+}
 
 .food-item-wrap,
 .widget,

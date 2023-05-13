@@ -46,19 +46,7 @@
                     <h5>Payment Options</h5>
                     <ul>
                         <li>
-                            <a href="#"> <img src="images/paypal.png" alt="Paypal"> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <img src="images/mastercard.png" alt="Mastercard"> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <img src="images/maestro.png" alt="Maestro"> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <img src="images/stripe.png" alt="Stripe"> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <img src="images/bitcoin.png" alt="Bitcoin"> </a>
+                            <a href="#"> <img src="images/logo-zalopay.svg" alt="ZaloPay"> </a>
                         </li>
                     </ul>
                 </div>

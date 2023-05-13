@@ -12,34 +12,28 @@ if (isset($_POST['submit'])) {
         empty($_POST['fname']) ||
         empty($_POST['lname']) ||
         empty($_POST['email']) ||
-        empty($_POST['password']) ||
+        empty($_POST['address']) ||
         empty($_POST['phone'])) {
         $error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 																<strong>All fields Required!</strong>
 															</div>';
     } else {
-
-
         if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) // Validate email address
         {
             $error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 																<strong>invalid email!</strong>
 															</div>';
-        } elseif (strlen($_POST['password']) < 6) {
-            $error = '<div class="alert alert-danger alert-dismissible fade show">
-																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Password must be >=6!</strong>
-															</div>';
-        } elseif (strlen($_POST['phone']) < 10) {
+        }
+        elseif (strlen($_POST['phone']) < 10) {
             $error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 																<strong>invalid phone!</strong>
 															</div>';
         } else {
 
-            $mql = "update users set username='$_POST[uname]', f_name='$_POST[fname]', l_name='$_POST[lname]',email='$_POST[email]',phone='$_POST[phone]',password='" . md5($_POST[password]) . "' where u_id='$_GET[user_upd]' ";
+            $mql = "update users set username='$_POST[uname]', f_name='$_POST[fname]', l_name='$_POST[lname]',email='$_POST[email]',phone='$_POST[phone]',address='$_POST[address]' where u_id='$_GET[user_upd]' ";
             mysqli_query($db, $mql);
             $success = '<div class="alert alert-success alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -169,11 +163,11 @@ if (isset($_POST['submit'])) {
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">Password</label>
-                                                    <input type="text" name="password"
+                                                    <label class="control-label">Address</label>
+                                                    <input type="text" name="address"
                                                            class="form-control form-control-danger"
-                                                           value="<?php echo $newrow['password']; ?>"
-                                                           placeholder="password">
+                                                           value="<?php echo $newrow['address']; ?>"
+                                                           placeholder="address">
                                                 </div>
                                             </div>
 
