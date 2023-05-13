@@ -207,6 +207,9 @@ hr {
     border: 1px solid #eaebeb;
     border-radius: 2px;
 }
+.widget-body .form-group{
+    display: inline-block;
+}
 
 .form-group small {
     color: #e74c3c;

@@ -150,4 +150,7 @@
 .forbidden-feedback{
     cursor: not-allowed;
 }
+.forbidden-remove{
+    cursor: not-allowed;
+}
 

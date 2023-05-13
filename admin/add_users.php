@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-    <title>Ela - Bootstrap Admin Dashboard Template</title>
+    <title>Admin Dashboard</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -134,7 +134,6 @@ if (isset($_POST['submit'])) {
                             <div class="card-body">
                                 <form action='' method='post' enctype="multipart/form-data">
                                     <div class="form-body">
-
                                         <hr>
                                         <div class="row p-t-20">
                                             <div class="col-md-6">
@@ -147,9 +146,9 @@ if (isset($_POST['submit'])) {
                                             <!--/span-->
                                             <div class="col-md-6">
                                                 <div class="form-group has-danger">
-                                                    <label class="control-label">First-Name</label>
+                                                    <label class="control-label">Firstname</label>
                                                     <input type="text" name="fname"
-                                                           class="form-control form-control-danger" placeholder="jon">
+                                                           class="form-control form-control-danger" placeholder="john">
                                                 </div>
                                             </div>
                                             <!--/span-->
@@ -158,9 +157,9 @@ if (isset($_POST['submit'])) {
                                         <div class="row p-t-20">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">Last-Name </label>
+                                                    <label class="control-label">Lastname </label>
                                                     <input type="text" name="lname" class="form-control"
-                                                           placeholder="doe">
+                                                           placeholder="snow">
                                                 </div>
                                             </div>
                                             <!--/span-->
@@ -224,9 +223,6 @@ if (isset($_POST['submit'])) {
             <!-- End PAge Content -->
         </div>
         <!-- End Container fluid  -->
-        <!-- footer -->
-        <?php include_once ('footer.php')?>
-        <!-- End footer -->
     </div>
     <!-- End Page wrapper  -->
 </div>

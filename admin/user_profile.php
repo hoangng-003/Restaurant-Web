@@ -39,7 +39,7 @@ if (strlen($_SESSION['user_id']) == 0) {
         <meta name="author" content="">
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-        <title>Ela - Bootstrap Admin Dashboard Template</title>
+        <title>Admin Dashboard</title>
         <!-- Bootstrap Core CSS -->
         <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
         <!-- Custom CSS -->
@@ -142,8 +142,6 @@ if (strlen($_SESSION['user_id']) == 0) {
                         <td colspan="2"><b><?php echo $row['f_name']; ?>'s profile</b></td>
 
                     </tr>
-
-
                     <tr>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -192,11 +190,7 @@ if (strlen($_SESSION['user_id']) == 0) {
                     </tr>
 
                 <?php }
-
-
                 ?>
-
-
             </table>
         </form>
     </div>

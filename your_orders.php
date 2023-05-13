@@ -38,9 +38,10 @@ if (isset($_POST['submit'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style type="text/css" rel="stylesheet">
 
-        :root{
+        :root {
             --primary-color: #60ba62;
         }
+
         .indent-small {
             margin-left: 5px;
         }
@@ -82,14 +83,14 @@ if (isset($_POST['submit'])) {
             color: #777;
         }
 
-        .order-table .row{
+        .order-table .row {
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
-            -moz-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
-            -webkit-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
-            -o-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
-            -ms-box-shadow: 0 0 40px 0 rgba(0,0,0,.15)
+            box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+            -moz-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+            -webkit-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+            -o-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+            -ms-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15)
         }
 
         table {
@@ -237,7 +238,7 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="order-table col-xs-12 col-sm-7 col-md-7 ">
                     <div class="bg-gray">
-                        <div class="row" >
+                        <div class="row">
                             <table>
                                 <thead>
                                 <tr>
@@ -296,19 +297,25 @@ if (isset($_POST['submit'])) {
                                                 ?>
 
                                             </td>
-                                            <td data-column="Date"> <?php echo $row['hms']."<br>".$row['dmy']; ?></td>
-                                            <td data-column="Action"><a
-                                                        href="delete_orders.php?order_del=<?php echo $row['o_id']; ?>"
-                                                        onclick="return confirm('Are you sure you want to cancel your order?');"
-                                                        class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i
-                                                            class="fa fa-trash-o" style="font-size:16px"></i></a>
+                                            <td data-column="Date"> <?php echo $row['hms'] . "<br>" . $row['dmy']; ?></td>
+                                            <td data-column="Action">
+                                                <a
+                                                    <?php
+                                                    if ($status != "in process") {
+                                                        echo "href='delete_orders.php?order_del=$row[o_id]'";
+                                                        echo "onclick=\"return confirm('Are you sure you want to cancel your order?');\"";
+                                                    }
+                                                    ?>
+                                                        class="btn btn-danger btn-flat btn-addon btn-xs m-b-10 <?php if ($status == "in process") echo "forbidden-remove"; ?>">
+                                                    <i class="fa fa-trash-o" style="font-size:16px"></i>
+                                                </a>
                                             </td>
                                             <td data-column="Feedback"
                                             ">
                                             <form action="" method="post">
                                                 <div>
                                                     <input type="number" name="d_id" hidden>
-                                                    <a class="btn btn-info btn-flat btn-addon btn-xs m-b-10 <?php if($status != "closed") echo "forbidden-feedback"; else echo "show-feedback"; ?>"
+                                                    <a class="btn btn-info btn-flat btn-addon btn-xs m-b-10 <?php if ($status != "closed") echo "forbidden-feedback"; else echo "show-feedback"; ?>"
                                                        d_id="<?php echo $row['d_id']; ?>" ;>
                                                         <i class="fa fa-star-o"
                                                            style="font-size:16px; color: white;"></i>
@@ -383,7 +390,6 @@ include_once("./footer.php");
 <script src="js/feedback.js"></script>
 <script src="js/profile.js"></script>
 </body>
-
 </html>
 <?php
 }
