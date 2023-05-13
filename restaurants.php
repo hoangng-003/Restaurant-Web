@@ -104,7 +104,7 @@ session_start();
                                                 <h5><a href="dishes.php?res_id=' . $rows['rs_id'] . '" >' . $rows['title'] . '</a></h5> <span>' . $rows['address'] . ' <a href="#">...</a></span>
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item"><i class="fa fa-check"></i> Min $' . $rows['min_price'] . '</li>
-                                                    <li class="list-inline-item"><i class="fa fa-motorcycle"></i> 30 min</li>
+                                                    <li class="list-inline-item list-inline-item-distance" latitude="'.$rows["latitude"].'" longitude="'.$rows["longitude"].'"><i class="fa fa-motorcycle"></i> 30 min</li>
                                                 </ul>
                                             </div>
                                             <!-- end:Entry description -->
@@ -149,9 +149,10 @@ session_start();
     <script src="js/lib/bootstrap-slider.min.js"></script>
     <script src="js/lib/jquery.isotope.min.js"></script>
     <script src="js/lib/headroom.js"></script>
-    <script src="js/thegreen.min.js"></script>
+    <script src="js/thegreen.js"></script>
     <script src="js/profile.js"></script>
     <script src="js/widget-body.js"></script>
+    <script src="js/get-distance.js"></script>
 </body>
 
 </html>

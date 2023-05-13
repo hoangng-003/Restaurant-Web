@@ -211,7 +211,7 @@ session_start(); //start temp session until logout/browser closed
                                             <h5><a href="dishes.php?res_id=' . $rows['rs_id'] . '" >' . $rows['title'] . '</a></h5> <span>' . $rows['address'] . '</span>
                                             <div class="bottom-part">
                                                 <div class="cost"><i class="fa fa-check"></i> Min $' . $rows['min_price'] . '</div>
-                                                <div class="mins"><i class="fa fa-motorcycle"></i> 30 min</div>
+                                                <div class="mins featured-restaurants-distance" latitude="'.$rows["latitude"].'" longitude="'.$rows["longitude"].'"><i class="fa fa-motorcycle"></i></div>
                                                 <div class="ratings"> <span>
                                                     ' . rating_star($rows['rating']) . '
                                                     </span> (' . $rows['count'] . ') </div>
@@ -309,7 +309,7 @@ session_start(); //start temp session until logout/browser closed
 <script src="js/lib/tether.min.js"></script>
 <script src="js/lib/bootstrap.min.js"></script>
 <script src="js/lib/bootstrap-slider.min.js"></script>
-<script src="js/lib/jquery`.isotope.min.js"></script>
+<script src="js/lib/jquery.isotope.min.js"></script>
 <script src="js/lib/headroom.js"></script>
 <script src="js/get-distance.js"></script>
 <script src="js/review.js"></script>

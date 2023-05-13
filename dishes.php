@@ -48,7 +48,7 @@ include_once 'product_action.php'; //including controller
     </div>
     <!-- end:Top links -->
     <!-- start: Inner page hero -->
-    <?php $ress = mysqli_query($db, "select * from restaurant where rs_id='$_GET[res_id]'");
+    <?php $ress = mysqli_query($db, "select getRestFeedbackRating(r.rs_id) as rating, getMinDishPrice(r.rs_id) as min_price, r.* from restaurant r where r.rs_id='$_GET[res_id]'");
     $rows = mysqli_fetch_array($ress);
 
     ?>
@@ -68,16 +68,13 @@ include_once 'product_action.php'; //including controller
                             <p><?php echo $rows['address']; ?></p>
                             <ul class="nav nav-inline">
                                 <li class="nav-item"><a class="nav-link active" href="#"><i class="fa fa-check"></i> Min
-                                        $ 10,00</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-motorcycle"></i> 30
-                                        min</a></li>
+                                        $<?php echo $rows['min_price']?></a></li>
+                                <li class="nav-item nav-item-distance" latitude="<?php echo $rows['latitude'] ?>"
+                                    longitude="<?php echo $rows['longitude']; ?>" style="color: white"><a class="nav-link" href="#"><i
+                                                class="fa fa-motorcycle"></i></a></li>
                                 <li class="nav-item ratings">
                                     <a class="nav-link" href="#"> <span>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
+                                    <?php echo rating_star($rows['rating']) ?>
                                     </span> </a>
                                 </li>
                             </ul>
@@ -328,9 +325,10 @@ include_once 'product_action.php'; //including controller
 <script src="js/lib/bootstrap-slider.min.js"></script>
 <script src="js/lib/jquery.isotope.min.js"></script>
 <script src="js/lib/headroom.js"></script>
-<script src="js/thegreen.min.js"></script>
+<script src="js/thegreen.js"></script>
 <script src="js/profile.js"></script>
 <script src="js/review.js"></script>
+<script src="js/get-distance.js"></script>
 </body>
 
 </html>

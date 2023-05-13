@@ -230,7 +230,7 @@ if (isset($_POST['submit'])) //if submit btn is pressed
 <script src="js/lib/bootstrap-slider.min.js"></script>
 <script src="js/lib/jquery.isotope.min.js"></script>
 <script src="js/lib/headroom.js"></script>
-<script src="js/thegreen.min.js"></script>
+<script src="js/thegreen.js"></script>
 <script src="js/registration.js"></script>
 </body>
 

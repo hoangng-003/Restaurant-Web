@@ -25,7 +25,7 @@ if (isset($_POST['submit'])){
                 $mql = "update users set password ='".md5($_POST["new_password"])."'  where u_id='$_SESSION[user_id]' ";
                 mysqli_query($db, $mql);
                 $success = '<div class="alert alert-success col-lg-8" style="position: relative; left: 50%; transform: translateX(-50%); margin-top: 1rem">
-                          <strong>Success!</strong> All changes has saved!</div>';
+                          <strong>Success!</strong> Your changes has been saved!</div>';
             }
         }
     }
@@ -118,7 +118,7 @@ include_once("./footer.php");
 <script src="js/lib/bootstrap-slider.min.js"></script>
 <script src="js/lib/jquery.isotope.min.js"></script>
 <script src="js/lib/headroom.js"></script>
-<script src="js/thegreen.min.js"></script>
+<script src="js/thegreen.js"></script>
 <script src="js/profile.js"></script>
 </body>
 

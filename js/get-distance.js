@@ -22,7 +22,6 @@ $(document).ready(function () {
     }
 
     function getLocation() {
-        let distance = $('.distance');
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, showError);
         } else {
@@ -31,33 +30,60 @@ $(document).ready(function () {
     }
 
     function showPosition(position) {
-        let distance = $('.distance');
-        for (const distanceElement of distance) {
-            let result = getDistance(distanceElement.attributes['latitude'].value, distanceElement.attributes['longitude'].value,
+        //index.php
+        for (const element of $('.distance')) {
+            let result = getDistance(element.attributes['latitude'].value, element.attributes['longitude'].value,
                 position.coords.latitude, position.coords.longitude);
             result = Math.round(result);
-            distanceElement.textContent = result.toString().concat('m');
+            element.textContent = result.toString().concat('m');
+        }
+        //index.php
+        for (const element of $('.featured-restaurants-distance')) {
+            let result = getDistance(element.attributes['latitude'].value, element.attributes['longitude'].value,
+                position.coords.latitude, position.coords.longitude);
+            result = Math.round(result);
+            element.textContent = result.toString().concat('m');
+        }
+        //restaurants.php
+        for (const element of $('.restaurant-entry .list-inline-item-distance')) {
+            let result = getDistance(element.attributes['latitude'].value, element.attributes['longitude'].value,
+                position.coords.latitude, position.coords.longitude);
+            result = Math.round(result);
+            element.textContent = result.toString().concat('m');
+        }
+        for (const element of $('.inner-page-hero .container .nav-item.nav-item-distance')) {
+            let result = getDistance(element.attributes['latitude'].value, element.attributes['longitude'].value,
+                position.coords.latitude, position.coords.longitude);
+            result = Math.round(result);
+            element.textContent = result.toString().concat('m');
         }
     }
 
     function showError(error) {
-        let distance = $('.distance');
         switch (error.code) {
             case error.PERMISSION_DENIED:
                 console.log("User denied the request for Geolocation.");
-                distance.hide();
+                $('.distance').hide();
+                $('.featured-restaurants-distance').hide();
+                $('.restaurant-entry .list-inline-item-distance').hide();
                 break;
             case error.POSITION_UNAVAILABLE:
                 console.log("Location information is unavailable.");
-                distance.hide();
+                $('.distance').hide();
+                $('.featured-restaurants-distance').hide();
+                $('.restaurant-entry .list-inline-item-distance').hide();
                 break;
             case error.TIMEOUT:
                 console.log("The request to get user location timed out.");
-                distance.hide();
+                $('.distance').hide();
+                $('.featured-restaurants-distance').hide();
+                $('.restaurant-entry .list-inline-item-distance').hide();
                 break;
             case error.UNKNOWN_ERROR:
                 console.log("An unknown error occurred.");
-                distance.hide();
+                $('.distance').hide();
+                $('.featured-restaurants-distance').hide();
+                $('.restaurant-entry .list-inline-item-distance').hide();
                 break;
         }
     }

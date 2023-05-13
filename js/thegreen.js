@@ -114,6 +114,16 @@ $(document).ready(function () {
             thisInput.val(newVal);
         }
     });
+
+    let cartValue = $('.widget.widget-cart .widget-body .value');
+    if (cartValue.text()==="$0"){
+        $('.widget.widget-cart .widget-body a').on("click",function (e){
+            e.preventDefault();
+        });
+        $('.widget.widget-cart .widget-body a').css({
+            "cursor":"not-allowed"
+        });
+    }
 });
 
 

@@ -149,8 +149,7 @@ include_once 'product_action.php'; //including controller
                                 <div class='product-rating__rating_star'>" . rating_star($r_d['rating_value']) . "</div>
                                 <div class='product-rating__feedback'>" . $r_d['feedback'] . "</div>
                             </div>" .
-                                        "</div>"
-                                    ;
+                                        "</div>";
                                 }
                                 $review_list = $review_list . "</div>";
                                 ?>
@@ -167,7 +166,10 @@ include_once 'product_action.php'; //including controller
                                                 <div class="rest-descr">
                                                     <h6><a href="#"><?php echo $product['title']; ?></a></h6>
                                                     <p> <?php echo $product['slogan']; ?></p>
-                                                    <button type="button" class="openModal" d_id='<?php echo $product['d_id']; ?>'><?php echo $product['count']; ?> Reviews</button>
+                                                    <button type="button" class="openModal"
+                                                            d_id='<?php echo $product['d_id']; ?>'><?php echo $product['count']; ?>
+                                                        Reviews
+                                                    </button>
                                                 </div>
                                                 <!-- end:Description -->
                                         </div>
@@ -193,13 +195,13 @@ include_once 'product_action.php'; //including controller
                             }
                         }
                         echo
-                            '<div class="modal" id="modal">
+                            '<div class="review-modal" id="review-modal">
                                 <div class="modal-content">
-                                    <span class="close">&times;</span>
-                                    <div class="wrapper">
-                                        <h3>Review</h3>
-                                        <div>' . $review_list . '</div>
-                                    </div>
+                                <span class="close">&times;</span>
+                                <div class="wrapper">
+                                    <h3 class="title">Review</h3>
+                                    <div>' . $review_list . '</div>
+                                </div>
                                 </div>
                             </div>';
                         ?>
@@ -269,9 +271,8 @@ include_once 'product_action.php'; //including controller
 </div>
 
 <!-- start: FOOTER -->
-<?php
-include_once("./footer.php");
-?>
+<?php include_once("./footer.php"); ?>
+<?php include_once("profile_modal.php") ?>
 <!-- end:Footer -->
 
 <!-- Bootstrap core JavaScript
@@ -282,7 +283,7 @@ include_once("./footer.php");
 <script src="js/lib/bootstrap-slider.min.js"></script>
 <script src="js/lib/jquery.isotope.min.js"></script>
 <script src="js/lib/headroom.js"></script>
-<script src="js/thegreen.min.js"></script>
+<script src="js/thegreen.js"></script>
 <script src="js/review.js"></script>
 <script src="js/widget-body.js"></script>
 </body>

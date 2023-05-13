@@ -154,7 +154,7 @@ include_once("./footer.php");
 <script src="js/lib/bootstrap-slider.min.js"></script>
 <script src="js/lib/jquery.isotope.min.js"></script>
 <script src="js/lib/headroom.js"></script>
-<script src="js/thegreen.min.js"></script>
+<script src="js/thegreen.js"></script>
 <script src="js/profile.js"></script>
 </body>
 
